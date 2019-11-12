@@ -1,0 +1,15 @@
+logging:
+  level:
+    Root: info
+    com.jbuelow: debug
+spring:
+  datasource:
+    url: jdbc:h2:~/injury-db
+    driverClassName: org.h2.Driver
+    username: sa
+    password: password
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+  h2:
+    console:
+      enabled: true
