@@ -32,13 +32,7 @@ public class InjuryTimeDisplay extends JFrame {
     setUndecorated(true);
     setLayout(new GridLayout());
     addComponents();
-    try {
-      setVisible(true);
-    } catch (HeadlessException e) {
-      log.error("========================================================\n"
-              + "===== We are in headless awt mode. ui not started. =====\n"
-              + "========================================================");
-    }
+    setVisible(true);
   }
 
   private void addComponents() {
