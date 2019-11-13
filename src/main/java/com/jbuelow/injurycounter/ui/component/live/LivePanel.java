@@ -10,10 +10,13 @@ public class LivePanel extends JPanel {
 
   private final LiveTitle liveTitle;
   private final Timer timer;
+  private final InjuryDetails injuryDetails;
 
-  public LivePanel(LiveTitle liveTitle, Timer timer) {
+  public LivePanel(LiveTitle liveTitle, Timer timer,
+      InjuryDetails injuryDetails) {
     this.liveTitle = liveTitle;
     this.timer = timer;
+    this.injuryDetails = injuryDetails;
   }
 
   @PostConstruct
@@ -21,6 +24,7 @@ public class LivePanel extends JPanel {
     setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
     add(liveTitle);
     add(timer);
+    add(injuryDetails);
   }
 
 }
