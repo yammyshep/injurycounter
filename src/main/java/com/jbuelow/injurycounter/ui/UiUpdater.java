@@ -2,6 +2,7 @@ package com.jbuelow.injurycounter.ui;
 
 import com.jbuelow.injurycounter.data.entity.Injury;
 import com.jbuelow.injurycounter.data.repo.InjuryRepository;
+import com.jbuelow.injurycounter.ui.component.live.InjuryDetails;
 import com.jbuelow.injurycounter.ui.component.live.Timer;
 import java.util.Collection;
 import java.util.stream.StreamSupport;
@@ -15,13 +16,15 @@ public class UiUpdater {
 
   private final InjuryRepository injuryRepo;
   private final Timer timer;
+  private final InjuryDetails injuryDetails;
 
   private long lastInjuryCount = 0;
 
   public UiUpdater(InjuryRepository injuryRepo,
-      Timer timer) {
+      Timer timer, InjuryDetails injuryDetails) {
     this.injuryRepo = injuryRepo;
     this.timer = timer;
+    this.injuryDetails = injuryDetails;
   }
 
   @Scheduled(fixedRate = 1000)
@@ -38,6 +41,7 @@ public class UiUpdater {
     Injury latestInjury = ((Collection<Injury>)injuries).stream().reduce((prev, next) -> next).orElse(null);
     assert latestInjury != null;
     timer.setLastInjury(latestInjury.getTimestamp().toInstant());
+    injuryDetails.setInjuryDetails(latestInjury);
   }
 
 }
