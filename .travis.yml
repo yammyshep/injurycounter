@@ -1,3 +1,22 @@
 language: java
 jdk:
-  - openjdk8
+- openjdk8
+before_deploy:
+  - export TRAVIS_TAG=$(git log --format=%h -1)
+  - git tag $TRAVIS_TAG
+  - cd target/
+  - sha256sum injury-counter.jar > injury-counter.jar.sha256
+  - md5sum injury-counter.jar > injury-counter.jar.md5
+  - cd ../
+deploy:
+  provider: releases
+  api_key:
+    secure: sLm8my7hyd5cIlXz6qNgWkA3rva4qTIPExDjrcY7l5wb8owE7JHqswn9v+3/m6yyumbmzpbXCaGszeJ6tjZEd4BiygB+tVfylnvkcgoSfAE60bUcbgkQCkvOG9km9SoNrpg/4OBbSdUog2LxC3SyH+EMqzeSxoEf6i4Bidq/SCpW/J2rzvh9nd36ADGevYi5igORdT/9VAmWCgNyWiqqmCJLeQwv9K155rWsVNQD3KGwCJugA8v7gKEIsDd9t+VubTaZprJKHuyfGll5hKD8vuloXpNlmQyMuPDyelJzrir5Lz7yvjzjGNpbGRcLQKp5pxpluSHPEdXhKuaqatkBrw11F0RRdwLhsITzEbmE3QVUNMtb7HTA0xTUnkhyvCKphhnJTAjI2YZ+ojfJ+spQwUZfwMvBywOCyMSe6y7U5JZIMfo9a4U+wReEiEuzqN/mCBoMah9w/bhpFSGHkHz+VwHRrCqf2TlvYnpLms648Pjw+DPCRFk7TLBEtXof/V2sfxf7j9owdyC0hNxH1ayspRXJBG3IrUxoC7wEdVdsQgKUBZM5pA0NdqhAv9cDy88wx6Dm8aKVcj/hmEA5FxMeyYZQJLgBUuSjUFH5aLQ9qkxNaxXnJA2M0waImEiPs0LD3rnwEU90sd8o05B0MmlEfkF4zyLirmFcNPYInwkBnZ8=
+  file:
+    - "target/injury-counter.jar"
+    - "target/injury-counter.jar.md5"
+    - "target/injury-counter.jar.sha256"
+  on:
+    repo: jbuelow1/injurycounter
+    branch: master
+  skip_cleanup: true
