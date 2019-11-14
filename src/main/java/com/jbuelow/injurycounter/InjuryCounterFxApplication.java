@@ -15,6 +15,8 @@ public class InjuryCounterFxApplication extends Application {
 
   private ConfigurableApplicationContext context;
 
+  private Parent root;
+
   public static void main(String[] args) {
     Application.launch(InjuryCounterFxApplication.class, args);
   }
@@ -23,6 +25,9 @@ public class InjuryCounterFxApplication extends Application {
   public void init() throws Exception {
     SpringApplicationBuilder builder = new SpringApplicationBuilder(InjuryCounterFxApplication.class);
     context = builder.run(getParameters().getRaw().toArray(new String[0]));
+    FXMLLoader loader = new FXMLLoader(new ClassPathResource("fxml/MainUi.fxml").getURL());
+    loader.setControllerFactory(context::getBean);
+    root = loader.load();
   }
 
   @Override
@@ -31,7 +36,6 @@ public class InjuryCounterFxApplication extends Application {
     primaryStage.setFullScreen(true);
     //primaryStage.setAlwaysOnTop(true);
 
-    Parent root = FXMLLoader.load(new ClassPathResource("fxml/MainUi.fxml").getURL());
     Scene scene = new Scene(root);
 
     primaryStage.setScene(scene);
