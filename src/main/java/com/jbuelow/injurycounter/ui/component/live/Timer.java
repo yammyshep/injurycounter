@@ -1,19 +1,14 @@
 package com.jbuelow.injurycounter.ui.component.live;
 
-import com.sun.org.apache.regexp.internal.RE;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.time.Duration;
 import java.time.Instant;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import javax.annotation.PostConstruct;
 import javax.swing.JLabel;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Component;
 
 @Slf4j
 public class Timer extends JLabel {
