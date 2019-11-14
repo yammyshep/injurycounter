@@ -29,13 +29,13 @@ public class Timer extends JLabel {
 
   @Override
   public void paintComponent(Graphics g) {
-    String text = getHumanReadableTimeSinceInstant();
+    String text = getHumanReadableTimeSinceInstant(lastInjury);
     setText(text);
     log.trace("Setting new timer text to {}", text);
     super.paintComponent(g);
   }
 
-  public String getHumanReadableTimeSinceInstant() {
+  public static String getHumanReadableTimeSinceInstant(Instant lastInjury) {
     Instant now = Instant.now();
     Duration duration = Duration.between(lastInjury, now);
     long mills = duration.toMillis();
