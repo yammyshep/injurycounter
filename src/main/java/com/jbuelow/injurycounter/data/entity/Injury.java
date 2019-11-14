@@ -16,7 +16,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Table(name = "injuries")
-public class Injury {
+public class Injury implements Comparable<Injury> {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
@@ -36,4 +36,8 @@ public class Injury {
 
   private byte[] drawing;
 
+  @Override
+  public int compareTo(Injury o) {
+    return this.getTimestamp().compareTo(o.getTimestamp());
+  }
 }
