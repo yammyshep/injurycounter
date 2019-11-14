@@ -5,7 +5,6 @@ import javax.annotation.PostConstruct;
 import javax.swing.JLabel;
 import org.springframework.stereotype.Component;
 
-@Component
 public class HistoryTitle extends JLabel {
 
   @PostConstruct

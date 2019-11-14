@@ -18,8 +18,6 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 @Slf4j
-@Component
-@EnableScheduling
 public class Clock extends JPanel {
 
   private final JLabel line1 = new JLabel();

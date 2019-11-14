@@ -12,8 +12,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 @Slf4j
-@Component
-@Profile("useUI")
+@Profile("useUI,!useFX")
 public class InjuryTimeDisplay extends JFrame {
 
   private final LivePanel livePanel;
