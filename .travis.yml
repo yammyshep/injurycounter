@@ -1,11 +1,6 @@
 language: java
 jdk:
 - openjdk8
-addons:
-  apt:
-    update: true
-before_install:
-  - sudp apt -y install openjfx
 before_deploy:
   - export TRAVIS_TAG=$(git log --format=%h -1)
   - git tag $TRAVIS_TAG
