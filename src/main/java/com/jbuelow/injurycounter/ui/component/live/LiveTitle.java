@@ -11,7 +11,7 @@ public class LiveTitle extends JLabel {
   @PostConstruct
   public void init() {
     setText("Time Since Injury");
-    setFont(new Font(getFont().getName(), getFont().getStyle(), 80));
+    setFont(new Font(getFont().getName(), getFont().getStyle(), 60));
   }
 
 }

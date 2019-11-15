@@ -11,7 +11,7 @@ public class HistoryTitle extends JLabel {
   @PostConstruct
   public void init() {
     setText("Injury History");
-    setFont(new Font(getFont().getName(), getFont().getStyle(), 80));
+    setFont(new Font(getFont().getName(), getFont().getStyle(), 60));
   }
 
 }

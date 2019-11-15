@@ -23,8 +23,8 @@ public class InjuryDetails extends JPanel {
 
   @PostConstruct
   public void setFonts() {
-    nameLabel.setFont(new Font(getFont().getName(), getFont().getStyle(), 45));
-    descriptionLabel.setFont(new Font(getFont().getName(), getFont().getStyle(), 25));
+    nameLabel.setFont(new Font(getFont().getName(), getFont().getStyle(), 48));
+    descriptionLabel.setFont(new Font(getFont().getName(), getFont().getStyle(), 26));
   }
 
   public void setInjuryDetails(Injury injury) {

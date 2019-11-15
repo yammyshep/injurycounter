@@ -29,8 +29,8 @@ public class Clock extends JPanel {
     add(line2);
     line1.setText("TIME");
     line2.setText("TIME");
-    line1.setFont(new Font(getFont().getName(), getFont().getStyle(), 45));
-    line2.setFont(new Font(getFont().getName(), getFont().getStyle(), 45));
+    line1.setFont(new Font(getFont().getName(), getFont().getStyle(), 24));
+    line2.setFont(new Font(getFont().getName(), getFont().getStyle(), 24));
   }
 
   @Override
@@ -46,7 +46,7 @@ public class Clock extends JPanel {
   }
 
   public String getHumanReadableDateAndTime(Instant time) {
-    return new SimpleDateFormat("EEEEEEEEEEEE, MMMMMMMMMMMM dd, yyyy").format(new Timestamp(time.toEpochMilli()));
+    return new SimpleDateFormat("EEEEEEEEEEEE, MMMMMMMMMMMM dd").format(new Timestamp(time.toEpochMilli()));
   }
 
   public String getHumanReadableSecondLine(Instant time) {
