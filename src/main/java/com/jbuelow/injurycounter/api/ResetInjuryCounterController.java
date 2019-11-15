@@ -6,15 +6,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ResetInjuryCounterController {
 
-  //private final Timer timer;
+  private final Timer timer;
 
-  public ResetInjuryCounterController() {
-    //this.timer = timer;
+  public ResetInjuryCounterController(Timer timer) {
+    this.timer = timer;
   }
 
   @GetMapping("/api/reset")
   public void resetCounter() {
-    //timer.setLastInjury(Instant.now());
+    timer.setLastInjury(Instant.now());
   }
 
 }
