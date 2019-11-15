@@ -4,8 +4,8 @@ jdk:
 addons:
   apt:
     update: true
-    packages:
-      - openjfx
+before_install:
+  - sudp apt -y install openjfx
 before_deploy:
   - export TRAVIS_TAG=$(git log --format=%h -1)
   - git tag $TRAVIS_TAG
