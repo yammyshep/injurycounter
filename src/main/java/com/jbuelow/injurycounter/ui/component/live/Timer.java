@@ -6,6 +6,7 @@ import java.time.Duration;
 import java.time.Instant;
 import javax.annotation.PostConstruct;
 import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -20,20 +21,25 @@ public class Timer extends JLabel {
   @Setter
   private Instant lastInjury = Instant.now();
 
+  public Timer() {
+    super("", SwingConstants.CENTER);
+  }
+
   @PostConstruct
   public void init() {
     setText("TIME");
-    setFont(new Font(getFont().getName(), getFont().getStyle(), 36));
+    setFont(new Font(getFont().getName(), getFont().getStyle(), 100));
   }
 
   @Override
   public void paintComponent(Graphics g) {
-    String text = getHumanReadableTimeSinceInstant();
+    String text = getHumanReadableDiff();
     setText(text);
     log.trace("Setting new timer text to {}", text);
     super.paintComponent(g);
   }
 
+  @Deprecated
   public String getHumanReadableTimeSinceInstant() {
     Instant now = Instant.now();
     Duration duration = Duration.between(lastInjury, now);
@@ -51,6 +57,19 @@ public class Timer extends JLabel {
       return mills/3600000+" hours, "+(mills%3600000)/60000+" minutes, "+((mills%3600000)%60000)/1000+" seconds";
     }
     return mills/86400000+" days, "+(mills%86400000)/3600000+" hours";
+  }
+
+  private String getHumanReadableDiff() {
+    Instant now = Instant.now();
+    Duration duration = Duration.between(lastInjury, now);
+    long absSeconds = Math.abs(duration.toMillis());
+    String positive = String.format(
+        "<html>%d days<br>%02d:%02d:%02d</html>",
+        absSeconds / 86400000,
+        (absSeconds % 86400000) / 3600000,
+        (absSeconds % 3600000) / 60000,
+        (absSeconds % 60000) / 1000);
+    return absSeconds < 0 ? "-" + positive : positive;
   }
 
   @Scheduled(fixedRate = 20)

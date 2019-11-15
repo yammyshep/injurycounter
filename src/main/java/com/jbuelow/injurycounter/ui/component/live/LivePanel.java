@@ -1,7 +1,7 @@
 package com.jbuelow.injurycounter.ui.component.live;
 
+import java.awt.BorderLayout;
 import javax.annotation.PostConstruct;
-import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import org.springframework.stereotype.Component;
 
@@ -21,10 +21,10 @@ public class LivePanel extends JPanel {
 
   @PostConstruct
   public void init() {
-    setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-    add(liveTitle);
-    add(timer);
-    add(injuryDetails);
+    setLayout(new BorderLayout());
+    add(liveTitle, BorderLayout.NORTH);
+    add(timer, BorderLayout.CENTER);
+    add(injuryDetails, BorderLayout.SOUTH);
   }
 
 }

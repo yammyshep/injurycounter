@@ -1,9 +1,8 @@
 package com.jbuelow.injurycounter.ui;
 
-import com.jbuelow.injurycounter.ui.component.history.HistoryPanel;
 import com.jbuelow.injurycounter.ui.component.live.LivePanel;
+import java.awt.BorderLayout;
 import java.awt.Frame;
-import java.awt.GridLayout;
 import javax.annotation.PostConstruct;
 import javax.swing.JFrame;
 import lombok.extern.slf4j.Slf4j;
@@ -16,12 +15,12 @@ import org.springframework.stereotype.Component;
 public class InjuryTimeDisplay extends JFrame {
 
   private final LivePanel livePanel;
-  private final HistoryPanel historyPanel;
+  //private final HistoryPanel historyPanel;
 
-  public InjuryTimeDisplay(LivePanel livePanel,
-      HistoryPanel historyPanel) {
+  public InjuryTimeDisplay(LivePanel livePanel/*,
+      HistoryPanel historyPanel*/) {
     this.livePanel = livePanel;
-    this.historyPanel = historyPanel;
+    //this.historyPanel = historyPanel;
   }
 
   @PostConstruct
@@ -29,14 +28,14 @@ public class InjuryTimeDisplay extends JFrame {
     //setAlwaysOnTop(true); //our frame can never bottom
     setExtendedState(Frame.MAXIMIZED_BOTH);
     setUndecorated(true);
-    setLayout(new GridLayout());
+    setLayout(new BorderLayout());
     addComponents();
     setVisible(true);
   }
 
   private void addComponents() {
-    add(livePanel);
-    add(historyPanel);
+    add(livePanel, BorderLayout.CENTER);
+    //add(historyPanel);
   }
 
 
