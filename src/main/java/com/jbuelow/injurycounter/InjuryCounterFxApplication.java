@@ -34,7 +34,7 @@ public class InjuryCounterFxApplication extends Application {
   public void start(Stage primaryStage) throws Exception {
     primaryStage.setTitle("Idea Injury Counter");
     primaryStage.setFullScreen(true);
-    primaryStage.setAlwaysOnTop(true);
+    //primaryStage.setAlwaysOnTop(true);
 
     Scene scene = new Scene(root);
 
