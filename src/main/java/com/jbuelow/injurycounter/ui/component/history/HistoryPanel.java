@@ -1,13 +1,13 @@
 package com.jbuelow.injurycounter.ui.component.history;
 
 import com.jbuelow.injurycounter.ui.component.clock.Clock;
-import java.awt.FlowLayout;
 import javax.annotation.PostConstruct;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import org.springframework.stereotype.Component;
 
+@Component
 public class HistoryPanel extends JPanel {
 
   private final HistoryTitle historyTitle;

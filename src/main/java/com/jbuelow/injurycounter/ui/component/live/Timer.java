@@ -11,6 +11,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
 
 @Slf4j
+@Component
+@EnableScheduling
 public class Timer extends JLabel {
 
   @Setter

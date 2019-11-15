@@ -1,13 +1,10 @@
 package com.jbuelow.injurycounter.ui.component.clock;
 
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.GridLayout;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
-import java.util.Date;
 import javax.annotation.PostConstruct;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
@@ -18,6 +15,8 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 @Slf4j
+@Component
+@EnableScheduling
 public class Clock extends JPanel {
 
   private final JLabel line1 = new JLabel();

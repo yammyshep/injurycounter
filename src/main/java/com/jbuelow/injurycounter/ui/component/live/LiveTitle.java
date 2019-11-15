@@ -5,6 +5,7 @@ import javax.annotation.PostConstruct;
 import javax.swing.JLabel;
 import org.springframework.stereotype.Component;
 
+@Component
 public class LiveTitle extends JLabel {
 
   @PostConstruct

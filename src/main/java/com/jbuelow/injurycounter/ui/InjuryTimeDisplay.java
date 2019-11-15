@@ -4,7 +4,6 @@ import com.jbuelow.injurycounter.ui.component.history.HistoryPanel;
 import com.jbuelow.injurycounter.ui.component.live.LivePanel;
 import java.awt.Frame;
 import java.awt.GridLayout;
-import java.awt.HeadlessException;
 import javax.annotation.PostConstruct;
 import javax.swing.JFrame;
 import lombok.extern.slf4j.Slf4j;
@@ -12,7 +11,8 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 @Slf4j
-@Profile("useUI,!useFX")
+@Component
+@Profile("useUI")
 public class InjuryTimeDisplay extends JFrame {
 
   private final LivePanel livePanel;

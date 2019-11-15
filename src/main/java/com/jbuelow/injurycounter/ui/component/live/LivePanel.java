@@ -5,6 +5,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import org.springframework.stereotype.Component;
 
+@Component
 public class LivePanel extends JPanel {
 
   private final LiveTitle liveTitle;
