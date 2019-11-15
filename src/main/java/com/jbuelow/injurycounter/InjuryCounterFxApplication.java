@@ -8,12 +8,12 @@ import javafx.stage.Stage;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.core.io.ClassPathResource;
 
 @SpringBootApplication
 public class InjuryCounterFxApplication extends Application {
 
   private ConfigurableApplicationContext context;
+  private FXMLLoader loader;
 
   private Parent root;
 
@@ -25,13 +25,15 @@ public class InjuryCounterFxApplication extends Application {
   public void init() throws Exception {
     SpringApplicationBuilder builder = new SpringApplicationBuilder(InjuryCounterFxApplication.class);
     context = builder.run(getParameters().getRaw().toArray(new String[0]));
-    FXMLLoader loader = new FXMLLoader(new ClassPathResource("fxml/MainUi.fxml").getURL());
+    loader = new FXMLLoader();
     loader.setControllerFactory(context::getBean);
-    root = loader.load();
   }
 
   @Override
   public void start(Stage primaryStage) throws Exception {
+    loader.setLocation(getClass().getResource("fxml/MainUi.fxml"));
+    root = loader.load();
+
     primaryStage.setTitle("Idea Injury Counter");
     primaryStage.setFullScreen(true);
     primaryStage.setAlwaysOnTop(true);
@@ -40,5 +42,10 @@ public class InjuryCounterFxApplication extends Application {
 
     primaryStage.setScene(scene);
     primaryStage.show();
+  }
+
+  @Override
+  public void stop() {
+    context.stop();
   }
 }
