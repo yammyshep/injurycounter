@@ -8,7 +8,9 @@ import javax.annotation.PostConstruct;
 import javax.swing.JLabel;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
 
 @Slf4j
 @Component
@@ -21,7 +23,7 @@ public class Timer extends JLabel {
   @PostConstruct
   public void init() {
     setText("TIME");
-    setFont(new Font(getFont().getName(), getFont().getStyle(), 45));
+    setFont(new Font(getFont().getName(), getFont().getStyle(), 36));
   }
 
   @Override
