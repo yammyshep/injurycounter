@@ -4,6 +4,7 @@ import static com.jbuelow.injurycounter.service.update.Sha256Helper.getSHA;
 import static com.jbuelow.injurycounter.service.update.Sha256Helper.toHexString;
 
 import com.jbuelow.injurycounter.service.update.config.UpdateConfig;
+import com.jbuelow.injurycounter.ui.popup.update.UpdateWindow;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -26,14 +27,16 @@ import org.springframework.stereotype.Service;
 public class AutomaticUpdateService {
 
   private final UpdateConfig config;
+  private final UpdateWindow window;
 
   private String localJarHash;
   private UpdateState state;
   private File jarLocation;
 
   public AutomaticUpdateService(
-      UpdateConfig config) {
+      UpdateConfig config, UpdateWindow window) {
     this.config = config;
+    this.window = window;
   }
 
   @PostConstruct
@@ -91,18 +94,36 @@ public class AutomaticUpdateService {
         log.info("Update will not be downloaded as it cannot be written to disk");
         return;
       }
+      new UpdateDownloadThread().start();
+    }
+  }
 
+  private class UpdateDownloadThread extends Thread {
+    @Override
+    public void run() {
       log.info("Updating software");
-      this.state = UpdateState.INPROGRESS;
+      state = UpdateState.INPROGRESS;
+      window.setText("Downloading update...");
+      window.setVisibiltiy(true);
 
       log.info("Downloading file: {}", config.getUrl().getJar());
-      Files.copy(new URL(config.getUrl().getJar()).openStream(), new File(jarLocation.getPath()+".UPDATE").toPath(),
-          StandardCopyOption.REPLACE_EXISTING);
+      try {
+        Files.copy(new URL(config.getUrl().getJar()).openStream(), new File(jarLocation.getPath()+".UPDATE").toPath(),
+            StandardCopyOption.REPLACE_EXISTING);
+      } catch (IOException e) {
+        log.error("Exception: ", e);
+      }
       log.info("Download finished");
+      window.setText("Installing update...");
 
       log.warn("\n##################################################\n#  SOFTWARE WILL NOW RESTART TO COMPLETE UPDATE  #\n##################################################");
 
-      Thread.sleep(5000);
+      try {
+        Thread.sleep(5000);
+      } catch (InterruptedException e) {
+        log.error("Exception: ", e);
+      }
+      window.setText("Restarting...");
       System.exit(0);
     }
   }
