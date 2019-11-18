@@ -4,7 +4,8 @@ import lombok.Getter;
 
 public enum UpdateState {
 
-  FULL(0),
+  INPROGRESS(1),
+  READY(0),
   NOWRITE(-1),
   DISABLED(-2);
 
