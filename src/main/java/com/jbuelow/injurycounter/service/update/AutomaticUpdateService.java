@@ -82,7 +82,7 @@ public class AutomaticUpdateService {
     String downloadedHashFile = new String(IOUtils.toByteArray(new URL(config.getUrl().getHash())));
     String remoteHash = downloadedHashFile.split(" ", 2)[0];
 
-    if (remoteHash != localJarHash) {
+    if (!remoteHash.equals(localJarHash)) {
       log.info("A new update is avaliable.");
 
       if (state.getLevel() < 0) {
