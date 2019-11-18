@@ -1,6 +1,8 @@
 package com.jbuelow.injurycounter.ui;
 
 import com.jbuelow.injurycounter.ui.component.live.LivePanel;
+import com.jbuelow.injurycounter.ui.helper.DisplaySizing;
+import com.jbuelow.injurycounter.ui.helper.event.resolutiondetermined.ResolutionDeterminedEventPublisher;
 import java.awt.BorderLayout;
 import java.awt.Frame;
 import javax.annotation.PostConstruct;
@@ -15,12 +17,15 @@ import org.springframework.stereotype.Component;
 public class InjuryTimeDisplay extends JFrame {
 
   private final LivePanel livePanel;
+  private final ResolutionDeterminedEventPublisher rdep;
   //private final HistoryPanel historyPanel;
 
   public InjuryTimeDisplay(LivePanel livePanel/*,
-      HistoryPanel historyPanel*/) {
+      HistoryPanel historyPanel*/,
+      ResolutionDeterminedEventPublisher rdep) {
     this.livePanel = livePanel;
     //this.historyPanel = historyPanel;
+    this.rdep = rdep;
   }
 
   @PostConstruct
@@ -31,6 +36,10 @@ public class InjuryTimeDisplay extends JFrame {
     setLayout(new BorderLayout());
     addComponents();
     setVisible(true);
+
+    DisplaySizing ds = new DisplaySizing();
+    ds.setDisplayDimension(getSize());
+    rdep.publish(ds);
   }
 
   private void addComponents() {

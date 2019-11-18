@@ -1,5 +1,6 @@
 package com.jbuelow.injurycounter.ui.component.live;
 
+import com.jbuelow.injurycounter.ui.helper.event.resolutiondetermined.ResolutionDeterminedEvent;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.time.Duration;
@@ -9,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.ApplicationListener;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -28,7 +30,6 @@ public class Timer extends JLabel {
   @PostConstruct
   public void init() {
     setText("TIME");
-    setFont(new Font(getFont().getName(), getFont().getStyle(), 100));
   }
 
   @Override
@@ -75,6 +76,17 @@ public class Timer extends JLabel {
   @Scheduled(fixedRate = 20)
   public void refreshTimer() {
     repaint();
+  }
+
+  @Component
+  private class ResolutionDeterminedEventListener implements
+      ApplicationListener<ResolutionDeterminedEvent> {
+
+    @Override
+    public void onApplicationEvent(ResolutionDeterminedEvent resolutionDeterminedEvent) {
+      setFont(new Font(getFont().getName(), getFont().getStyle(), resolutionDeterminedEvent.getSizing().displayPercent(13.8f)));
+    }
+
   }
 
 }
