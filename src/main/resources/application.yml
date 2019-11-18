@@ -15,3 +15,9 @@ spring:
   h2:
     console:
       enabled: true
+injury-counter:
+  update:
+    enabled: true
+    url:
+      hash: https://github.com/jbuelow1/injurycounter/releases/latest/download/injury-counter.jar.sha256
+      jar: https://github.com/jbuelow1/injurycounter/releases/latest/download/injury-counter.jar
