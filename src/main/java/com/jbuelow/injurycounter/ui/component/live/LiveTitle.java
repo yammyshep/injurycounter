@@ -25,7 +25,7 @@ public class LiveTitle extends JLabel {
 
     @Override
     public void onApplicationEvent(ResolutionDeterminedEvent resolutionDeterminedEvent) {
-      setFont(new Font(getFont().getName(), getFont().getStyle(), resolutionDeterminedEvent.getSizing().displayPercent(12f)));
+      setFont(new Font(getFont().getName(), getFont().getStyle(), resolutionDeterminedEvent.getSizing().displayPercent(15f)));
     }
 
   }

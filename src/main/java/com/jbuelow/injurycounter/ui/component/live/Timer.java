@@ -84,7 +84,7 @@ public class Timer extends JLabel {
 
     @Override
     public void onApplicationEvent(ResolutionDeterminedEvent resolutionDeterminedEvent) {
-      setFont(new Font(getFont().getName(), getFont().getStyle(), resolutionDeterminedEvent.getSizing().displayPercent(13.8f)));
+      setFont(new Font(getFont().getName(), getFont().getStyle(), resolutionDeterminedEvent.getSizing().displayPercent(15f)));
     }
 
   }
