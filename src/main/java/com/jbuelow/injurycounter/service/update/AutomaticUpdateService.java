@@ -9,6 +9,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.security.NoSuchAlgorithmException;
 import javax.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
@@ -24,8 +26,8 @@ public class AutomaticUpdateService {
   private final UpdateConfig config;
 
   private String localJarHash;
-
   private UpdateState state;
+  private File jarLocation;
 
   public AutomaticUpdateService(
       UpdateConfig config) {
@@ -35,6 +37,7 @@ public class AutomaticUpdateService {
   @PostConstruct
   public void hashJar() throws URISyntaxException {
     File f = new ApplicationHome(AutomaticUpdateService.class).getSource();
+    jarLocation = f;
 
     if (f == null) {
       log.error("Jar file not found. Disabling autoupdate service...");
@@ -50,7 +53,7 @@ public class AutomaticUpdateService {
       this.state = UpdateState.NOWRITE;
       log.warn("user does not have write access to jar file. Will still check for updates");
     } else {
-      this.state = UpdateState.FULL;
+      this.state = UpdateState.READY;
       log.debug("Auto updater loaded jar file located at {} successfully", f.getAbsolutePath());
     }
 
@@ -71,8 +74,8 @@ public class AutomaticUpdateService {
   }
 
   @Scheduled(fixedRate = 300000)
-  public void checkForNewUpdate() throws IOException {
-    if (state.getLevel() < -1) {
+  public void checkForNewUpdate() throws IOException, InterruptedException {
+    if (state != UpdateState.READY) {
       return;
     }
 
@@ -87,7 +90,18 @@ public class AutomaticUpdateService {
         return;
       }
 
+      log.info("Updating software");
+      this.state = UpdateState.INPROGRESS;
 
+      log.info("Downloading file: {}", config.getUrl().getJar());
+      Files.copy(new URL(config.getUrl().getJar()).openStream(), new File(jarLocation.getPath()+".UPDATE").toPath(),
+          StandardCopyOption.REPLACE_EXISTING);
+      log.info("Download finished");
+
+      log.warn("\n##################################################\n#  SOFTWARE WILL NOW RESTART TO COMPLETE UPDATE  #\n##################################################");
+
+      Thread.sleep(5000);
+      System.exit(0);
     }
   }
 
