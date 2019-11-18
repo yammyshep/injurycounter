@@ -24,12 +24,6 @@ public class InjuryDetails extends JPanel {
     add(descriptionLabel, BorderLayout.SOUTH);
   }
 
-  @PostConstruct
-  public void setFonts() {
-    nameLabel.setFont(new Font(getFont().getName(), getFont().getStyle(), 64));
-    descriptionLabel.setFont(new Font(getFont().getName(), getFont().getStyle(), 32));
-  }
-
   public void setInjuryDetails(Injury injury) {
     nameLabel.setText(injury.getPerson().getName());
     descriptionLabel.setText(injury.getDescription());
@@ -41,8 +35,8 @@ public class InjuryDetails extends JPanel {
 
     @Override
     public void onApplicationEvent(ResolutionDeterminedEvent resolutionDeterminedEvent) {
-      nameLabel.setFont(new Font(getFont().getName(), getFont().getStyle(), resolutionDeterminedEvent.getSizing().displayPercent(11.5f)));
-      descriptionLabel.setFont(new Font(getFont().getName(), getFont().getStyle(), resolutionDeterminedEvent.getSizing().displayPercent(4.5f)));
+      nameLabel.setFont(new Font(getFont().getName(), getFont().getStyle(), resolutionDeterminedEvent.getSizing().displayPercent(13f)));
+      descriptionLabel.setFont(new Font(getFont().getName(), getFont().getStyle(), resolutionDeterminedEvent.getSizing().displayPercent(7.5f)));
     }
 
   }
