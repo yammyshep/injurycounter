@@ -16,11 +16,13 @@ import javax.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 import org.springframework.boot.system.ApplicationHome;
+import org.springframework.context.annotation.Profile;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
+@Profile("!noUpdate")
 public class AutomaticUpdateService {
 
   private final UpdateConfig config;
