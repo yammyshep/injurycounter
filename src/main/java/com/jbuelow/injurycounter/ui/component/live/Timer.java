@@ -65,7 +65,7 @@ public class Timer extends JLabel {
     Duration duration = Duration.between(lastInjury, now);
     long absSeconds = Math.abs(duration.toMillis());
     String positive = String.format(
-        "<html>%d days<br>%02d:%02d:%02d</html>",
+        "<html><center>%d days<br>%02d:%02d:%02d</center></html>",
         absSeconds / 86400000,
         (absSeconds % 86400000) / 3600000,
         (absSeconds % 3600000) / 60000,
