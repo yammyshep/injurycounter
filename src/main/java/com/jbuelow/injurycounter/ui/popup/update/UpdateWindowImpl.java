@@ -52,7 +52,7 @@ public class UpdateWindowImpl extends JDialog implements UpdateWindow {
     @Override
     public void onApplicationEvent(ResolutionDeterminedEvent resolutionDeterminedEvent) {
       DisplaySizing ds = resolutionDeterminedEvent.getSizing();
-      setSize(ds.displayPercent(80), ds.displayPercent(30));
+      setSize(ds.displayPercent(100), ds.displayPercent(30));
       setLocationRelativeTo(null);
       message.setFont(new Font(message.getFont().getName(), message.getFont().getStyle(), resolutionDeterminedEvent.getSizing().displayPercent(5f)));
     }
