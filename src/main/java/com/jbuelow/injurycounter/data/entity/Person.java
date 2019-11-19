@@ -12,7 +12,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Table(name = "people")
-public class Person {
+public class Person implements Comparable<Person> {
 
   @Id
   private Long id;
@@ -31,4 +31,8 @@ public class Person {
 
   private Timestamp dob;
 
+  @Override
+  public int compareTo(Person o) {
+    return this.getName().compareTo(o.getName());
+  }
 }
