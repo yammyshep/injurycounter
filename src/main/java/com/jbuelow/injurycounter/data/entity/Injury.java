@@ -26,6 +26,9 @@ public class Injury {
   @OneToOne
   private Person person;
 
+  @OneToOne
+  private Person instigator;
+
   @NotNull
   private Timestamp timestamp = Timestamp.from(Instant.now());
 
