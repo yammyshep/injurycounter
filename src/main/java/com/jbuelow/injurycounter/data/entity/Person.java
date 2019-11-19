@@ -20,11 +20,10 @@ public class Person {
   @NotNull
   private String name;
 
-  private String fullName;
+  private String shortName;
 
   private String gender;
 
-  @NotNull
   private Integer grade;
 
   @NotNull
