@@ -18,13 +18,13 @@ public class DisplayPowerStateManagementService {
     this.cec = cec;
   }
 
-  @Scheduled(cron = "0 15 7 ? * MON-FRI *")
+  @Scheduled(cron = "0 15 7 ? * MON-FRI")
   public void powerOnDisplayJob() throws IOException {
     log.info("Turning display on...");
     cec.setPowerState(0, true);
   }
 
-  @Scheduled(cron = "0 30 15 ? * MON-FRI *")
+  @Scheduled(cron = "0 30 15 ? * MON-FRI")
   public void powerOffDisplayJob() throws IOException {
     log.info("Turning display off...");
     cec.setPowerState(0, false);
