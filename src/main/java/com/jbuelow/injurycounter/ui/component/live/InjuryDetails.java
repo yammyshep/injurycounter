@@ -1,9 +1,11 @@
 package com.jbuelow.injurycounter.ui.component.live;
 
 import com.jbuelow.injurycounter.data.entity.Injury;
+import com.jbuelow.injurycounter.data.entity.Person;
 import com.jbuelow.injurycounter.ui.helper.event.resolutiondetermined.ResolutionDeterminedEvent;
 import java.awt.BorderLayout;
 import java.awt.Font;
+import java.util.Optional;
 import javax.annotation.PostConstruct;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -25,7 +27,16 @@ public class InjuryDetails extends JPanel {
   }
 
   public void setInjuryDetails(Injury injury) {
-    nameLabel.setText(injury.getPerson().getName());
+    StringBuilder nameSB = new StringBuilder();
+    Person instigator = injury.getInstigator();
+    Person victim = injury.getPerson();
+    if (instigator != null &&
+        instigator != victim) {
+      nameSB.append(Optional.ofNullable(instigator.getShortName()).orElse(instigator.getName()));
+      nameSB.append(" \uD83E\uDC46 ");
+    }
+    nameSB.append(Optional.ofNullable(victim.getShortName()).orElse(victim.getName()));
+    nameLabel.setText(nameSB.toString());
     descriptionLabel.setText(injury.getDescription());
   }
 
