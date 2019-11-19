@@ -20,6 +20,11 @@ public class Person implements Comparable<Person> {
   @NotNull
   private String name;
 
+  public void setName(String name) {
+    this.name = name;
+    this.shortName = name.split(" ", 2)[0]+" "+name.split(" ", 2)[1].substring(0,1)+".";
+  }
+
   private String shortName;
 
   private String gender;
