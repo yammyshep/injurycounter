@@ -18,6 +18,11 @@ public class ResolutionDeterminedEventPublisher {
 
   public void publish(DisplaySizing displaySizing) {
     log.info("Publishing dynamic display resize event with resolution of {}p", displaySizing.displayPercent(100));
+    if (displaySizing.displayPercent(100)<100) {
+      log.error("Screen size of {} is not valid", displaySizing.displayPercent(100));
+      log.error("Restarting...");
+      System.exit(0);
+    }
     ResolutionDeterminedEvent e = new ResolutionDeterminedEvent(this, displaySizing);
     applicationEventPublisher.publishEvent(e);
   }
