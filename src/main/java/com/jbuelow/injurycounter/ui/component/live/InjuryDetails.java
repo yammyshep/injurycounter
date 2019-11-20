@@ -33,7 +33,9 @@ public class InjuryDetails extends JPanel {
     if (instigator != null &&
         instigator != victim) {
       nameSB.append(Optional.ofNullable(instigator.getShortName()).orElse(instigator.getName()));
-      nameSB.append(" \uD83E\uDC46 ");
+      nameSB.append(" ")
+          .append(nameLabel.getFont().canDisplay('\u2192') ? "\u2192" : ">")
+          .append(" ");
     }
     nameSB.append(Optional.ofNullable(victim.getShortName()).orElse(victim.getName()));
     nameLabel.setText(nameSB.toString());
