@@ -1,4 +1,5 @@
 logging:
+  file: log/injury-app.log
   level:
     Root: info
     com.jbuelow: debug
