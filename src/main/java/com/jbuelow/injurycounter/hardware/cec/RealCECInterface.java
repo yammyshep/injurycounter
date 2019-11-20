@@ -23,7 +23,6 @@ public class RealCECInterface implements CECInterface {
     OutputStreamWriter writer = new OutputStreamWriter(client.getOutputStream());
     writer.write("as\n");
     writer.flush();
-    writer.close();
   }
 
   @Override
@@ -33,9 +32,6 @@ public class RealCECInterface implements CECInterface {
     InputStreamReader reader = new InputStreamReader(client.getInputStream());
     writer.write("pow "+device+"\n");
     writer.flush();
-
-    writer.close();
-    reader.close();
     return false;
   }
 
@@ -44,7 +40,6 @@ public class RealCECInterface implements CECInterface {
     OutputStreamWriter writer = new OutputStreamWriter(client.getOutputStream());
     writer.write((state?"on ":"standby ")+device+"\n");
     writer.flush();
-    writer.close();
   }
 
 }
