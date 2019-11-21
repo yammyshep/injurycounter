@@ -31,6 +31,12 @@ public class Injury {
 
   private String description;
 
+  @NotNull
+  private boolean hideDescription = false;
+
   private byte[] drawing;
+
+  @NotNull
+  private boolean hideDrawing = false;
 
 }
