@@ -26,6 +26,12 @@ public class InjuryDetails extends JPanel {
     add(descriptionLabel, BorderLayout.SOUTH);
   }
 
+  @PostConstruct
+  public void setFonts() {
+    nameLabel.setFont(new Font(getFont().getName(), getFont().getStyle(), 64));
+    descriptionLabel.setFont(new Font(getFont().getName(), getFont().getStyle(), 32));
+  }
+
   public void setInjuryDetails(Injury injury) {
     StringBuilder nameSB = new StringBuilder();
     Person instigator = injury.getInstigator();
