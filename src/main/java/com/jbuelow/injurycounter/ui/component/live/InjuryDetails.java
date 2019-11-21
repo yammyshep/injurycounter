@@ -32,7 +32,7 @@ public class InjuryDetails extends JPanel {
 
   public void setInjuryDetails(Injury injury) {
     nameLabel.setText(injury.getPerson().getName());
-    descriptionLabel.setText(injury.getDescription());
+    descriptionLabel.setText(injury.isHideDescription()?injury.getDescription():"<<DESCRIPTION HIDDEN>>");
   }
 
   @Component
