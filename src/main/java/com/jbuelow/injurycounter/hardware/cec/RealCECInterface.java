@@ -4,42 +4,53 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import javax.annotation.PostConstruct;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
+@Slf4j
 @Component
 @Profile("useCEC")
 public class RealCECInterface implements CECInterface {
 
   private Process client;
 
+  private OutputStreamWriter out;
+  private InputStreamReader in;
+
   @PostConstruct
   public void init() throws IOException {
     client = Runtime.getRuntime().exec("cec-client -d 1");
+    out = new OutputStreamWriter(client.getOutputStream());
+    in = new InputStreamReader(client.getInputStream());
   }
 
   @Override
   public void makeActiveSource() throws IOException {
-    OutputStreamWriter writer = new OutputStreamWriter(client.getOutputStream());
-    writer.write("as\n");
-    writer.flush();
+    sendCommand("as");
   }
 
   @Override
   @Deprecated //until working
   public boolean getPowerState(int device) throws IOException {
-    OutputStreamWriter writer = new OutputStreamWriter(client.getOutputStream());
-    InputStreamReader reader = new InputStreamReader(client.getInputStream());
-    writer.write("pow "+device+"\n");
-    writer.flush();
-    return false;
+    throw new NotImplementedException();
   }
 
   @Override
   public void setPowerState(int device, boolean state) throws IOException {
-    OutputStreamWriter writer = new OutputStreamWriter(client.getOutputStream());
-    writer.write((state?"on ":"standby ")+device+"\n");
-    writer.flush();
+    sendCommand((state?"on ":"standby ")+device);
+  }
+
+  private void sendCommand(String command) {
+    assert client.isAlive() : "Client is dead";
+    try {
+      log.debug("Writing command to cecClient: '{}'", command);
+      out.write(command+"\n");
+      out.flush();
+    } catch (IOException e) {
+      log.error("Exception:", e);
+    }
   }
 
 }
