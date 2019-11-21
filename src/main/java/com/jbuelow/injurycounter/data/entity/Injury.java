@@ -34,10 +34,17 @@ public class Injury implements Comparable<Injury> {
 
   private String description;
 
+  @NotNull
+  private boolean hideDescription = false;
+
   private byte[] drawing;
+
+  @NotNull
+  private boolean hideDrawing = false;
 
   @Override
   public int compareTo(Injury o) {
     return this.getTimestamp().compareTo(o.getTimestamp());
   }
+
 }
