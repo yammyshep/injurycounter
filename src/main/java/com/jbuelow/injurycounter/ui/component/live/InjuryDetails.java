@@ -39,7 +39,7 @@ public class InjuryDetails extends JPanel {
     }
     nameSB.append(Optional.ofNullable(victim.getShortName()).orElse(victim.getName()));
     nameLabel.setText(nameSB.toString());
-    descriptionLabel.setText(injury.getDescription());
+    descriptionLabel.setText(injury.isHideDescription()?injury.getDescription():"<<DESCRIPTION HIDDEN>>");
   }
 
   @Component
