@@ -6,6 +6,8 @@ import com.jbuelow.injurycounter.data.entity.Person;
 import com.jbuelow.injurycounter.data.repo.AccessLogRepository;
 import com.jbuelow.injurycounter.data.repo.InjuryRepository;
 import com.jbuelow.injurycounter.data.repo.PersonRepository;
+import java.util.Iterator;
+import java.util.Objects;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -32,8 +34,11 @@ public class DropRecordController {
   @PostMapping("/person")
   public @ResponseBody Person dropPerson(HttpServletRequest httpReq, @RequestBody Person person) {
     assert person != null;
-    for (AccessLog l : accessRepo.findAll()) {
-      if (l.getInjury().getId().equals(person.getId())) {
+    Iterator<AccessLog> logs = accessRepo.findAll().iterator();
+    while (logs.hasNext()) {
+      AccessLog l = logs.next();
+      if (Objects.isNull(l.getPerson()))
+      if (l.getPerson().getId().equals(person.getId())) {
         l.setInjury(null);
         accessRepo.save(l);
       }
@@ -45,7 +50,12 @@ public class DropRecordController {
   @PostMapping("/injury")
   public @ResponseBody Injury dropInjury(HttpServletRequest httpReq, @RequestBody Injury injury) {
     assert injury != null;
-    for (AccessLog l : accessRepo.findAll()) {
+    Iterator<AccessLog> logs = accessRepo.findAll().iterator();
+    while (logs.hasNext()) {
+      AccessLog l = logs.next();
+      if (Objects.isNull(l.getInjury())) {
+        continue;
+      }
       if (l.getInjury().getId().equals(injury.getId())) {
         l.setInjury(null);
         accessRepo.save(l);
