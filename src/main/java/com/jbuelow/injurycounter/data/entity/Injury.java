@@ -29,6 +29,9 @@ public class Injury implements Comparable<Injury> {
   private boolean reviewed = false;
 
   @NotNull
+  private boolean hideFromStats = false;
+
+  @NotNull
   @OneToOne
   private Person person;
 
