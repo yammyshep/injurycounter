@@ -7,7 +7,6 @@ import javax.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 @Slf4j
 @Component
@@ -34,7 +33,7 @@ public class RealCECInterface implements CECInterface {
   @Override
   @Deprecated //until working
   public boolean getPowerState(int device) throws IOException {
-    throw new NotImplementedException();
+    throw new RuntimeException("Not Implemented");
   }
 
   @Override
