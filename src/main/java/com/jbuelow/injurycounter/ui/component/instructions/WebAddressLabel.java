@@ -1,5 +1,6 @@
 package com.jbuelow.injurycounter.ui.component.instructions;
 
+import com.jbuelow.injurycounter.ui.component.instructions.config.InstructionsPanelConfig;
 import com.jbuelow.injurycounter.ui.helper.event.resolutiondetermined.ResolutionDeterminedEvent;
 import java.awt.Font;
 import java.io.IOException;
@@ -19,7 +20,12 @@ public class WebAddressLabel extends JLabel {
   private Resource icon;
 
   @Setter
-  private String webAddress = "injury.jbuelow.com";
+  private String webAddress;
+
+  public WebAddressLabel(
+      InstructionsPanelConfig config) {
+    this.webAddress = config.getWebAddress();
+  }
 
   @PostConstruct
   public void init() throws IOException {
