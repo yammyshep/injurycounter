@@ -46,4 +46,5 @@ public class Injury implements Comparable<Injury> {
   public int compareTo(Injury o) {
     return this.getTimestamp().compareTo(o.getTimestamp());
   }
+
 }
