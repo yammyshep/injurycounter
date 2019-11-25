@@ -64,6 +64,16 @@ public class InjuryTimeDisplay extends JFrame {
     tabPane.addTab("instructions", instructionsPanel);
   }
 
+  @Scheduled(fixedRate = 360000)
+  public void setPaneToLive() {
+    log.debug("Setting panel to live view");
+    tabPane.setSelectedComponent(livePanel);
+  }
 
+  @Scheduled(fixedRate = 360000, initialDelay = 300000)
+  public void setPaneToInstructions() {
+    log.debug("Setting panel to instructions view");
+    tabPane.setSelectedComponent(instructionsPanel);
+  }
 
 }
