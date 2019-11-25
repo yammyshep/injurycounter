@@ -4,12 +4,14 @@ import com.jbuelow.injurycounter.data.entity.Injury;
 import com.jbuelow.injurycounter.data.repo.InjuryRepository;
 import com.jbuelow.injurycounter.ui.component.live.InjuryDetails;
 import com.jbuelow.injurycounter.ui.component.live.Timer;
-import java.util.Collection;
-import java.util.stream.StreamSupport;
+import java.util.ArrayList;
+import java.util.Collections;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+@Slf4j
 @Service
 @EnableScheduling
 public class UiUpdater {
@@ -18,7 +20,7 @@ public class UiUpdater {
   private final Timer timer;
   private final InjuryDetails injuryDetails;
 
-  private long lastInjuryCount = 0;
+  private Injury lastInjury = new Injury();
 
   public UiUpdater(InjuryRepository injuryRepo,
       Timer timer, InjuryDetails injuryDetails) {
@@ -29,19 +31,23 @@ public class UiUpdater {
 
   @Scheduled(fixedRate = 1000)
   public void checkDB() {
-    Iterable<Injury> injuries = injuryRepo.findAll();
-    long injuryCount = StreamSupport.stream(injuries.spliterator(), false).count();
-    if (injuryCount != lastInjuryCount) {
-      setLastInjury();
+    ArrayList<Injury> injuries = (ArrayList<Injury>) injuryRepo.findAll();
+    Collections.sort(injuries);
+    Injury injury = injuries.get(injuries.size()-1);
+    if (injury != lastInjury) {
+      log.debug("New injury candidate found with id {}.", injury.getId());
+      setLastInjury(injury);
+      lastInjury = injury;
     }
   }
 
-  private void setLastInjury() {
-    Iterable<Injury> injuries = injuryRepo.findAll();
-    Injury latestInjury = ((Collection<Injury>)injuries).stream().reduce((prev, next) -> next).orElse(null);
-    assert latestInjury != null;
-    timer.setLastInjury(latestInjury.getTimestamp().toInstant());
-    injuryDetails.setInjuryDetails(latestInjury);
+  private void setLastInjury(Injury injury) {
+    if (injury.isHidden()) {
+      log.debug("Injury #{} is hidden. Cancelling ui update.", injury.getId());
+      return;
+    }
+    timer.setLastInjury(injury.getTimestamp().toInstant());
+    injuryDetails.setInjuryDetails(injury);
   }
 
 }
