@@ -15,7 +15,7 @@ public class InstructionsPanel extends JPanel {
 
   private final InstructionsListPanel listPanel;
 
-  private final JLabel title = new JLabel("Submit your injury", SwingConstants.CENTER);
+  private final JLabel title = new JLabel("<html><br>Submit your injury</html>", SwingConstants.CENTER);
 
   public InstructionsPanel(
       InstructionsListPanel listPanel) {
