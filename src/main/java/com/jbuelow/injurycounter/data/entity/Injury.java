@@ -23,6 +23,12 @@ public class Injury implements Comparable<Injury> {
   private Long id;
 
   @NotNull
+  private boolean hidden = false;
+
+  @NotNull
+  private boolean reviewed = false;
+
+  @NotNull
   @OneToOne
   private Person person;
 
