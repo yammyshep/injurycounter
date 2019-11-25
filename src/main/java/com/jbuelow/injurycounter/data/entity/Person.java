@@ -1,6 +1,7 @@
 package com.jbuelow.injurycounter.data.entity;
 
 import java.sql.Timestamp;
+import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -32,12 +33,26 @@ public class Person implements Comparable<Person> {
   private Integer grade;
 
   @NotNull
-  private Boolean staff = false;
+  private boolean staff = false;
 
   private Timestamp dob;
 
   @Override
   public int compareTo(Person o) {
     return this.getName().compareTo(o.getName());
+  }
+
+  public static boolean isEqual(Person p1, Person p2) {
+    if (p1 == p2) {
+      return true;
+    }
+    return
+        (Objects.equals(p1.getId(), p2.getId())) &&
+        (Objects.equals(p1.getName(), p2.getName())) &&
+        (Objects.equals(p1.getShortName(), p2.getShortName())) &&
+        (Objects.equals(p1.getGender(), p2.getGender())) &&
+        (Objects.equals(p1.getGrade(), p2.getGrade())) &&
+        (p1.isStaff() == p2.isStaff()) &&
+        (Objects.equals(p1.getDob(), p2.getDob()));
   }
 }

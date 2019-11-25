@@ -2,6 +2,8 @@ package com.jbuelow.injurycounter.data.entity;
 
 import java.sql.Timestamp;
 import java.time.Instant;
+import java.util.Arrays;
+import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -54,6 +56,21 @@ public class Injury implements Comparable<Injury> {
   @Override
   public int compareTo(Injury o) {
     return this.getTimestamp().compareTo(o.getTimestamp());
+  }
+
+  public static boolean isEqual(Injury i1, Injury i2) {
+    return
+        (Objects.equals(i1.getId(), i2.getId())) &&
+        (i1.isHidden() == i2.isHidden()) &&
+        (i1.isReviewed() == i2.isReviewed()) &&
+        (i1.isHideFromStats() == i2.isHideFromStats()) &&
+        (Person.isEqual(i1.getPerson(), i2.getPerson())) &&
+        (Person.isEqual(i1.getPerson(), i2.getPerson())) &&
+        (Objects.equals(i1.getTimestamp(), i2.getTimestamp())) &&
+        (Objects.equals(i1.getDescription(), i2.getDescription())) &&
+        (i1.isHideDescription() == i2.isHideDescription()) &&
+        (Arrays.equals(i1.getDrawing(), i2.getDrawing())) &&
+        (i1.isHideDrawing() == i2.isHideDrawing());
   }
 
 }

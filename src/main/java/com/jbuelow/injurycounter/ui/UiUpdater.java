@@ -34,7 +34,7 @@ public class UiUpdater {
     ArrayList<Injury> injuries = (ArrayList<Injury>) injuryRepo.findAll();
     Collections.sort(injuries);
     Injury injury = injuries.get(injuries.size()-1);
-    if (!injury.getId().equals(lastInjury.getId())) {
+    if (!Injury.isEqual(injury, lastInjury)) {
       log.debug("New injury candidate found with id {}.", injury.getId());
       setLastInjury(injury);
       lastInjury = injury;
