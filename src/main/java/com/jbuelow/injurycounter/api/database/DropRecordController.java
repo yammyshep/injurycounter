@@ -40,7 +40,7 @@ public class DropRecordController {
       if (Objects.isNull(l.getPerson())) {
         continue;
       }
-      if (l.getPerson().getId().equals(person.getId())) {
+      if (l.getId().equals(person.getId())) {
         l.setInjury(null);
         accessRepo.save(l);
       }
