@@ -4,16 +4,16 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
 import com.jayway.jsonpath.JsonPath;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -21,7 +21,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 @SpringBootTest
-@RunWith(SpringJUnit4ClassRunner.class)
+@ExtendWith(SpringExtension.class)
 @TestMethodOrder(OrderAnnotation.class)
 public class ManualRecordDropAndAddControllerSpringTest {
 
@@ -32,8 +32,8 @@ public class ManualRecordDropAndAddControllerSpringTest {
 
   private Long testInjuryId;
 
-  @Before
-  public void setup() {
+  @BeforeEach
+  void setup() {
     this.mvc = MockMvcBuilders.webAppContextSetup(wac).build();
   }
 
@@ -58,7 +58,7 @@ public class ManualRecordDropAndAddControllerSpringTest {
     MockHttpServletRequestBuilder rb = MockMvcRequestBuilders.post("/api/db/add/injury");
     rb.accept(MediaType.APPLICATION_JSON);
     rb.contentType(MediaType.APPLICATION_JSON);
-    rb.content("{\"person\": {\"id\": 1234}, \"description\": \"Left the stove on\"}");
+    rb.content("{\"person\": {\"id\": 1234, \"name\": \"\"}, \"description\": \"Left the stove on\"}");
     mvc.perform(rb)
         .andExpect(jsonPath("$").exists())
         .andExpect(jsonPath("$.id").isNumber())
