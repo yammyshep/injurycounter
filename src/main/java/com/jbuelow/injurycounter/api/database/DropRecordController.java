@@ -41,7 +41,7 @@ public class DropRecordController {
         continue;
       }
       if (l.getPerson().getId().equals(person.getId())) {
-        l.setInjury(null);
+        l.setPerson(null);
         accessRepo.save(l);
       }
     }
