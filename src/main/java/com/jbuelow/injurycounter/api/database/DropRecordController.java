@@ -37,7 +37,9 @@ public class DropRecordController {
     Iterator<AccessLog> logs = accessRepo.findAll().iterator();
     while (logs.hasNext()) {
       AccessLog l = logs.next();
-      if (Objects.isNull(l.getPerson()))
+      if (Objects.isNull(l.getPerson())) {
+        continue;
+      }
       if (l.getPerson().getId().equals(person.getId())) {
         l.setInjury(null);
         accessRepo.save(l);
