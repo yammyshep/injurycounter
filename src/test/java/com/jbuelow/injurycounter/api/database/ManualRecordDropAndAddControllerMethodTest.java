@@ -25,7 +25,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 @ExtendWith(MockitoExtension.class)
 @TestMethodOrder(OrderAnnotation.class)
-class ManualRecordDropAndAddControllerRawTest {
+class ManualRecordDropAndAddControllerMethodTest {
 
   @InjectMocks
   private DropRecordController dropController;
