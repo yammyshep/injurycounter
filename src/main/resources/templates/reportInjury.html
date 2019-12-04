@@ -6,16 +6,16 @@
 <body>
 <center>
   <h1>Idea Injury Counter</h1>
-  <br>
+  <br/>
   <form method="POST" action="/submit">
     <h3>Submit Injury</h3>
-    <label>Victim</label><br>
-    <select name="person" required><option selected value="">None</option><option th:each="person: ${persons}" th:value="${person.id}"><p th:text="${person.name}"></p></option></select><br>
-    <label>Instigator</label><br>
-    <select name="instigator"><option selected value="">None</option><option th:each="person: ${persons}" th:value="${person.id}"><p th:text="${person.name}"></p></option></select><br>
-    <label>Description</label><br>
-    <input type="text" name="description"><br>
-    <input type="submit">
+    <label>Victim</label><br/>
+    <select name="person" required=""><option selected="" value="">None</option><option th:each="person: ${persons}" th:value="${person.id}"><p th:text="${person.name}"></p></option></select><br/>
+    <label>Instigator</label><br/>
+    <select name="instigator"><option selected="" value="">None</option><option th:each="person: ${persons}" th:value="${person.id}"><p th:text="${person.name}"></p></option></select><br/>
+    <label>Description</label><br/>
+    <input type="text" name="description"/><br/>
+    <input type="submit"/>
   </form>
 </center>
 </body>
