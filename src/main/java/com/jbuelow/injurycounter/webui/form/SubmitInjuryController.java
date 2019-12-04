@@ -39,7 +39,7 @@ public class SubmitInjuryController {
 
   @PostMapping("/submit")
   public String postForm(HttpServletRequest httpReq, Model model, Injury injury) {
-    assert injury != null;
+    assert injury.getPerson() != null;
     injuryRepo.save(injury);
     accessRepo.save(AccessLog.forInjury(injury, httpReq));
     return "success";

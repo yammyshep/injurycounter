@@ -31,7 +31,7 @@ public class ManualAddController {
 
   @PostMapping("/person")
   public @ResponseBody Person addPerson(HttpServletRequest httpReq, @RequestBody Person person) {
-    assert person != null;
+    assert person.getId() != null;
     AccessLog al = new AccessLog();
     personRepo.save(person);
     accessRepo.save(AccessLog.forPerson(person, httpReq));
@@ -40,7 +40,7 @@ public class ManualAddController {
 
   @PostMapping("/injury")
   public @ResponseBody Injury addInjury(HttpServletRequest httpReq, @RequestBody Injury injury) {
-    assert injury != null;
+    assert injury.getPerson() != null;
     injuryRepo.save(injury);
     accessRepo.save(AccessLog.forInjury(injury, httpReq));
     return injury;
