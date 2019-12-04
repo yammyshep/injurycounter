@@ -4,11 +4,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
 import com.jayway.jsonpath.JsonPath;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -20,9 +18,9 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+@Slf4j
 @SpringBootTest
 @ExtendWith(SpringExtension.class)
-@TestMethodOrder(OrderAnnotation.class)
 public class ManualRecordDropAndAddControllerSpringTest {
 
   @Autowired
@@ -38,8 +36,8 @@ public class ManualRecordDropAndAddControllerSpringTest {
   }
 
   @Test
-  @Order(1)
-  public void addPersonTest() throws Exception {
+  void addThenDropPersonInjuryTest() throws Exception {
+    log.debug("Adding person to database...");
     MockHttpServletRequestBuilder rb = MockMvcRequestBuilders.post("/api/db/add/person");
     rb.accept(MediaType.APPLICATION_JSON);
     rb.contentType(MediaType.APPLICATION_JSON);
@@ -50,16 +48,14 @@ public class ManualRecordDropAndAddControllerSpringTest {
         .andExpect(jsonPath("$.name").value("Bumble Doofenson"))
         .andExpect(jsonPath("$.shortName").value("Bumble D."))
         .andDo(print());
-  }
 
-  @Test
-  @Order(2)
-  public void addInjuryTest() throws Exception {
-    MockHttpServletRequestBuilder rb = MockMvcRequestBuilders.post("/api/db/add/injury");
+    log.debug("Adding injury to database...");
+    rb = MockMvcRequestBuilders.post("/api/db/add/injury");
     rb.accept(MediaType.APPLICATION_JSON);
     rb.contentType(MediaType.APPLICATION_JSON);
-    rb.content("{\"person\": {\"id\": 1234, \"name\": \"\"}, \"description\": \"Left the stove on\"}");
+    rb.content("{\"person\": {\"id\": 1234}, \"description\": \"Left the stove on\"}");
     mvc.perform(rb)
+        .andDo(print())
         .andExpect(jsonPath("$").exists())
         .andExpect(jsonPath("$.id").isNumber())
         .andExpect(jsonPath("$.description").value("Left the stove on"))
@@ -67,25 +63,19 @@ public class ManualRecordDropAndAddControllerSpringTest {
         .andExpect(jsonPath("$.person.id").value(1234))
         .andDo(mvcResult -> testInjuryId = new Long((Integer)JsonPath.read(mvcResult.getResponse().getContentAsString(), "$.id")))
         .andDo(print());
-  }
 
-  @Test
-  @Order(3)
-  public void dropInjuryTest() throws Exception {
-    MockHttpServletRequestBuilder rb = MockMvcRequestBuilders.post("/api/db/drop/injury");
+    log.debug("Dropping injury from database...");
+    rb = MockMvcRequestBuilders.post("/api/db/drop/injury");
     rb.accept(MediaType.APPLICATION_JSON);
     rb.contentType(MediaType.APPLICATION_JSON);
-    rb.content("{\"id\": "+testInjuryId+"}");
+    rb.content("{\"id\": "+testInjuryId.toString()+"}");
     mvc.perform(rb)
         .andExpect(jsonPath("$").exists())
         .andExpect(jsonPath("$.id").value(testInjuryId))
         .andDo(print());
-  }
 
-  @Test
-  @Order(4)
-  public void dropPersonTest() throws Exception {
-    MockHttpServletRequestBuilder rb = MockMvcRequestBuilders.post("/api/db/drop/person");
+    log.debug("Dropping person from database...");
+    rb = MockMvcRequestBuilders.post("/api/db/drop/person");
     rb.accept(MediaType.APPLICATION_JSON);
     rb.contentType(MediaType.APPLICATION_JSON);
     rb.content("{\"id\": 1234}");
