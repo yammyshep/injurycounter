@@ -20,3 +20,5 @@ deploy:
     repo: jbuelow1/injurycounter
     branch: master
   skip_cleanup: true
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
