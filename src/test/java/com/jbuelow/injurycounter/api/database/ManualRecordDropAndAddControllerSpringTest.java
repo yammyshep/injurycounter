@@ -55,7 +55,6 @@ public class ManualRecordDropAndAddControllerSpringTest {
     rb.contentType(MediaType.APPLICATION_JSON);
     rb.content("{\"person\": {\"id\": 1234}, \"description\": \"Left the stove on\"}");
     mvc.perform(rb)
-        .andDo(print())
         .andExpect(jsonPath("$").exists())
         .andExpect(jsonPath("$.id").isNumber())
         .andExpect(jsonPath("$.description").value("Left the stove on"))
