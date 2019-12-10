@@ -94,7 +94,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>injury-counter-${project.version}</finalName>
+		<finalName>injury-counter</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
