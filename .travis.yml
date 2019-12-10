@@ -2,8 +2,6 @@ language: java
 jdk:
 - openjdk8
 before_deploy:
-  - export TRAVIS_TAG=$(git log --format=%h -1)
-  - git tag $TRAVIS_TAG
   - cd target/
   - sha256sum injury-counter.jar > injury-counter.jar.sha256
   - md5sum injury-counter.jar > injury-counter.jar.md5
@@ -18,7 +16,7 @@ deploy:
     - "target/injury-counter.jar.sha256"
   on:
     repo: jbuelow1/injurycounter
-    branch: master
+    tags: true
   skip_cleanup: true
 before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
