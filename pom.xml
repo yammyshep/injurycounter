@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.jbuelow</groupId>
 	<artifactId>injury-counter</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<name>injury-counter</name>
 	<description>Demo project for Spring Boot</description>
 
@@ -94,7 +94,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>injury-counter</finalName>
+		<finalName>injury-counter-${project.version}</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
