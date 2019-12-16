@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<head>
+  <title>Modify User</title>
+</head>
+<body>
+<center>
+  <h1>Idea Injury Counter</h1>
+  <br/>
+  <h2 th:if="${submitted}">User Updated</h2>
+  <h2 th:if="${userFound}">User Found</h2>
+  <h2 th:if="${userNotFound}">User does not exist</h2>
+  <form method="POST" action="/user" th:object="${command}">
+    <table>
+      <tr>
+        <td>Student ID #</td>
+        <td>
+          <input type="number" name="id" required="" th:field="*{id}" th:unless="*{id != null}"/>
+          <input type="number" name="id" required="" readonly="" th:field="*{id}" th:if="*{id != null}"/>
+        </td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><button type="submit" formmethod="get" formnovalidate="">Find User</button></td>
+      </tr>
+      <tr><td><br/></td></tr>
+      <tr>
+        <td>Full name</td>
+        <td><input type="text" name="name" required="" th:field="*{name}"/></td>
+      </tr>
+      <tr>
+        <td>Short name</td>
+        <td><input type="text" name="shortName" th:field="*{shortName}" disabled=""/></td>
+      </tr>
+      <tr><td><br/></td></tr>
+      <tr>
+        <td>Grade level</td>
+        <td><input type="number" name="grade" required="" th:field="*{grade}"/></td>
+      </tr>
+      <tr><td><br/></td></tr>
+      <tr>
+        <td>Gender (Optional)</td>
+        <td><input type="text" name="gender" th:field="*{gender}"/></td>
+      </tr>
+      <tr>
+        <td>Date of birth (Optional)</td>
+        <td><input type="date" name="dob" th:field="*{dob}" disabled=""/></td>
+      </tr>
+      <tr><td><br/></td></tr>
+      <tr>
+        <td>Staff</td>
+        <td><input type="checkbox" name="staff" checked="" disabled="" th:field="*{staff}"/></td>
+      </tr>
+    </table>
+    <input type="submit"/>
+  </form>
+</center>
+</body>
+</html>
