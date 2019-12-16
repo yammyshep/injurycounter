@@ -2,8 +2,11 @@ package com.jbuelow.injurycounter.webui.form;
 
 import com.jbuelow.injurycounter.data.entity.Person;
 import com.jbuelow.injurycounter.data.repo.PersonRepository;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.Objects;
 import java.util.Optional;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +28,8 @@ public class ModifyUserController {
   @InitBinder
   public void initBinder(WebDataBinder binder) {
     binder.registerCustomEditor(String.class, new StringTrimmerEditor(true));
+    binder.registerCustomEditor(Date.class,
+        new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true, 10));
   }
 
   @GetMapping("/user")

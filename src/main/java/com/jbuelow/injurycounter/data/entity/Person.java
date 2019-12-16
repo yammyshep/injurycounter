@@ -1,6 +1,6 @@
 package com.jbuelow.injurycounter.data.entity;
 
-import java.sql.Timestamp;
+import java.sql.Date;
 import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -35,7 +35,7 @@ public class Person implements Comparable<Person> {
   @NotNull
   private boolean staff = false;
 
-  private Timestamp dob;
+  private Date dob;
 
   @Override
   public int compareTo(Person o) {
