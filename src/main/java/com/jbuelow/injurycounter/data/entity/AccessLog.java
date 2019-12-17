@@ -37,6 +37,9 @@ public class AccessLog {
   @OneToOne
   private Person person;
 
+  @OneToOne
+  private Team team;
+
   public static AccessLog forInjury(Injury injury, HttpServletRequest request) {
     AccessLog al = new AccessLog();
     al.setInjury(injury);
@@ -51,4 +54,10 @@ public class AccessLog {
     return al;
   }
 
+  public static AccessLog forTeam(Team team, HttpServletRequest httpReq) {
+    AccessLog al = new AccessLog();
+    al.setTeam(team);
+    al.setRequest(new ClientInfo(httpReq));
+    return al;
+  }
 }
