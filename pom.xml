@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.jbuelow</groupId>
 	<artifactId>injury-counter</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 	<name>injury-counter</name>
 	<description>A java based marquee board to display the time since the last injury among an establishment</description>
 
