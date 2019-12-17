@@ -13,6 +13,7 @@
     <select name="person" required=""><option selected="" value="">None</option><option th:each="person: ${persons}" th:value="${person.id}"><p th:text="${person.name}"></p></option></select><br/>
     <label>Instigator</label><br/>
     <select name="instigator"><option selected="" value="">None</option><option th:each="person: ${persons}" th:value="${person.id}"><p th:text="${person.name}"></p></option></select><br/>
+    <p>Don't see the person you're looking for?<br/><a href="/person">Add a new person here</a>!</p>
     <label>Description</label><br/>
     <input type="text" name="description"/><br/>
     <input type="submit"/>
