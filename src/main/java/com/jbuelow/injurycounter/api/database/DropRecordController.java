@@ -3,9 +3,11 @@ package com.jbuelow.injurycounter.api.database;
 import com.jbuelow.injurycounter.data.entity.AccessLog;
 import com.jbuelow.injurycounter.data.entity.Injury;
 import com.jbuelow.injurycounter.data.entity.Person;
+import com.jbuelow.injurycounter.data.entity.Team;
 import com.jbuelow.injurycounter.data.repo.AccessLogRepository;
 import com.jbuelow.injurycounter.data.repo.InjuryRepository;
 import com.jbuelow.injurycounter.data.repo.PersonRepository;
+import com.jbuelow.injurycounter.data.repo.TeamRepository;
 import java.util.Iterator;
 import java.util.Objects;
 import javax.servlet.http.HttpServletRequest;
@@ -22,13 +24,15 @@ public class DropRecordController {
   private final PersonRepository personRepo;
   private final InjuryRepository injuryRepo;
   private final AccessLogRepository accessRepo;
+  private final TeamRepository teamRepo;
 
   public DropRecordController(PersonRepository personRepo,
       InjuryRepository injuryRepo,
-      AccessLogRepository accessRepo) {
+      AccessLogRepository accessRepo, TeamRepository teamRepo) {
     this.personRepo = personRepo;
     this.injuryRepo = injuryRepo;
     this.accessRepo = accessRepo;
+    this.teamRepo = teamRepo;
   }
 
   @PostMapping("/person")
@@ -65,6 +69,23 @@ public class DropRecordController {
     }
     injuryRepo.delete(injury);
     return injury;
+  }
+
+  @PostMapping("/team")
+  public @ResponseBody Team dropTeam(HttpServletRequest httpReq, @RequestBody Team team) {
+    Iterator<AccessLog> logs = accessRepo.findAll().iterator();
+    while (logs.hasNext()) {
+      AccessLog l = logs.next();
+      if (Objects.isNull(l.getTeam())) {
+        continue;
+      }
+      if (l.getTeam().getId().equals(team.getId())) {
+        l.setTeam(null);
+        accessRepo.save(l);
+      }
+    }
+    teamRepo.delete(team);
+    return team;
   }
 
 }
