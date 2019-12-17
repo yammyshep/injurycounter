@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import lombok.Getter;
@@ -34,6 +35,9 @@ public class Person implements Comparable<Person> {
 
   private Date dob;
 
+  @OneToOne
+  private Team team;
+
   @Override
   public int compareTo(Person o) {
     return this.getName().compareTo(o.getName());
@@ -49,6 +53,7 @@ public class Person implements Comparable<Person> {
         (Objects.equals(p1.getShortName(), p2.getShortName())) &&
         (Objects.equals(p1.getGender(), p2.getGender())) &&
         (Objects.equals(p1.getGrade(), p2.getGrade())) &&
-        (Objects.equals(p1.getDob(), p2.getDob()));
+        (Objects.equals(p1.getDob(), p2.getDob())) &&
+        (Objects.equals(p1.getTeam(), p2.getTeam()));
   }
 }
