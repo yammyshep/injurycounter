@@ -32,9 +32,6 @@ public class Person implements Comparable<Person> {
 
   private Integer grade;
 
-  @NotNull
-  private boolean staff = false;
-
   private Date dob;
 
   @Override
@@ -52,7 +49,6 @@ public class Person implements Comparable<Person> {
         (Objects.equals(p1.getShortName(), p2.getShortName())) &&
         (Objects.equals(p1.getGender(), p2.getGender())) &&
         (Objects.equals(p1.getGrade(), p2.getGrade())) &&
-        (p1.isStaff() == p2.isStaff()) &&
         (Objects.equals(p1.getDob(), p2.getDob()));
   }
 }
