@@ -10,7 +10,7 @@
   <h2 th:if="${submitted}">User Updated</h2>
   <h2 th:if="${userFound}">User Found</h2>
   <h2 th:if="${userNotFound}">User does not exist</h2>
-  <form method="POST" action="/user" th:object="${command}">
+  <form method="POST" action="/person" th:object="${command}">
     <table>
       <tr>
         <td>Student ID #</td>

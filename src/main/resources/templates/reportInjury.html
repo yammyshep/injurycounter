@@ -7,7 +7,7 @@
 <center>
   <h1>Idea Injury Counter</h1>
   <br/>
-  <form method="POST" action="/submit">
+  <form method="POST" action="/injury">
     <h3>Submit Injury</h3>
     <label>Victim</label><br/>
     <select name="person" required=""><option selected="" value="">None</option><option th:each="person: ${persons}" th:value="${person.id}"><p th:text="${person.name}"></p></option></select><br/>

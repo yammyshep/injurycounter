@@ -43,7 +43,7 @@ class IndexControllerTest {
         .andExpect(xpath("/html").exists())
         .andExpect(xpath("/html/head").exists())
         .andExpect(xpath("/html/body").exists())
-        .andExpect(xpath("//a[@href='/submit']").exists())
+        .andExpect(xpath("//a[@href='/injury']").exists())
         .andDo(print());
   }
 }

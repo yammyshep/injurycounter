@@ -47,7 +47,7 @@ public class ModifyUserControllerTest {
   @Test
   void getFormNewUserTest() throws Exception {
     log.debug("Fetching blank user form...");
-    MockHttpServletRequestBuilder rb = MockMvcRequestBuilders.get("/user");
+    MockHttpServletRequestBuilder rb = MockMvcRequestBuilders.get("/person");
     rb.accept(MediaType.TEXT_HTML);
     mvc.perform(rb)
         .andExpect(status().is2xxSuccessful())
@@ -80,7 +80,7 @@ public class ModifyUserControllerTest {
     personRepo.save(p);
 
     log.debug("Fetching existing user form...");
-    MockHttpServletRequestBuilder rb = MockMvcRequestBuilders.get("/user");
+    MockHttpServletRequestBuilder rb = MockMvcRequestBuilders.get("/person");
     rb.param("id", "1234");
     rb.accept(MediaType.TEXT_HTML);
     mvc.perform(rb)
@@ -122,7 +122,7 @@ public class ModifyUserControllerTest {
     teamRepo.save(t2);
 
     log.debug("Fetching user form...");
-    MockHttpServletRequestBuilder rb = MockMvcRequestBuilders.get("/user");
+    MockHttpServletRequestBuilder rb = MockMvcRequestBuilders.get("/person");
     rb.accept(MediaType.TEXT_HTML);
     mvc.perform(rb)
         .andExpect(status().is2xxSuccessful())
@@ -151,7 +151,7 @@ public class ModifyUserControllerTest {
   @Test
   void postNewUser() throws Exception {
     log.debug("Posting request to create a new test user...");
-    MockHttpServletRequestBuilder rb = MockMvcRequestBuilders.post("/user");
+    MockHttpServletRequestBuilder rb = MockMvcRequestBuilders.post("/person");
     rb.accept(MediaType.TEXT_HTML);
     rb.contentType("application/x-www-form-urlencoded");
     rb.content("id=1234&name=Jose Galegrekowsi");

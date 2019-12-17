@@ -29,7 +29,7 @@ public class SubmitInjuryController {
     this.accessRepo = accessRepo;
   }
 
-  @GetMapping("/submit")
+  @GetMapping("/injury")
   public String getForm(Model model) {
     ArrayList<Person> persons = (ArrayList<Person>) personRepo.findAll();
     Collections.sort(persons);
@@ -37,7 +37,7 @@ public class SubmitInjuryController {
     return "reportInjury";
   }
 
-  @PostMapping("/submit")
+  @PostMapping("/injury")
   public String postForm(HttpServletRequest httpReq, Model model, Injury injury) {
     assert injury.getPerson() != null;
     injuryRepo.save(injury);

@@ -56,7 +56,7 @@ class SubmitInjuryControllerTest {
   @Test
   void getFormNoUsersTest() throws Exception {
     log.debug("Fetching submission form page...");
-    MockHttpServletRequestBuilder rb = MockMvcRequestBuilders.get("/submit");
+    MockHttpServletRequestBuilder rb = MockMvcRequestBuilders.get("/injury");
     rb.accept(MediaType.TEXT_HTML);
     mvc.perform(rb)
         .andExpect(status().is2xxSuccessful())
@@ -80,7 +80,7 @@ class SubmitInjuryControllerTest {
     personRepo.save(person1);
 
     log.debug("Fetching submission form page...");
-    MockHttpServletRequestBuilder rb = MockMvcRequestBuilders.get("/submit");
+    MockHttpServletRequestBuilder rb = MockMvcRequestBuilders.get("/injury");
     rb.accept(MediaType.TEXT_HTML);
     mvc.perform(rb)
         .andExpect(status().is2xxSuccessful())
@@ -125,7 +125,7 @@ class SubmitInjuryControllerTest {
     personRepo.save(person3);
 
     log.debug("Fetching submission form page...");
-    MockHttpServletRequestBuilder rb = MockMvcRequestBuilders.get("/submit");
+    MockHttpServletRequestBuilder rb = MockMvcRequestBuilders.get("/injury");
     rb.accept(MediaType.TEXT_HTML);
     mvc.perform(rb)
         .andExpect(status().is2xxSuccessful())
@@ -159,7 +159,7 @@ class SubmitInjuryControllerTest {
 
   @Test
   void postFormNullTest() throws Exception {
-    MockHttpServletRequestBuilder rb = MockMvcRequestBuilders.post("/submit");
+    MockHttpServletRequestBuilder rb = MockMvcRequestBuilders.post("/injury");
     rb.accept(MediaType.TEXT_HTML);
     rb.contentType("application/x-www-form-urlencoded");
 
@@ -186,7 +186,7 @@ class SubmitInjuryControllerTest {
     personRepo.save(testPerson);
 
     log.debug("Posting submission...");
-    MockHttpServletRequestBuilder rb = MockMvcRequestBuilders.post("/submit");
+    MockHttpServletRequestBuilder rb = MockMvcRequestBuilders.post("/injury");
     rb.accept(MediaType.TEXT_HTML);
     rb.contentType("application/x-www-form-urlencoded");
     rb.content("person=1234&description=Left+the+stove+on+once+again");

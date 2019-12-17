@@ -36,7 +36,7 @@ public class ModifyUserController {
         new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true, 10));
   }
 
-  @GetMapping("/user")
+  @GetMapping("/person")
   public String getUserForm(Model model, @RequestParam(required = false) Long id) {
     if (Objects.isNull(id)) {
       model.addAttribute("command", new Person());
@@ -56,7 +56,7 @@ public class ModifyUserController {
     return "addUser";
   }
 
-  @PostMapping("/user")
+  @PostMapping("/person")
   public String postModifiedUser(Model model, Person person) {
     personRepo.save(person);
     model.addAttribute("command", person);
