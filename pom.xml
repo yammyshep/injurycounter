@@ -12,7 +12,7 @@
 	<artifactId>injury-counter</artifactId>
 	<version>1.0.0</version>
 	<name>injury-counter</name>
-	<description>Demo project for Spring Boot</description>
+	<description>A java based marquee board to display the time since the last injury among an establishment</description>
 
 	<properties>
 		<java.version>1.8</java.version>
