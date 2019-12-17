@@ -3,6 +3,7 @@ package com.jbuelow.injurycounter.data.entity;
 import java.awt.Color;
 import java.util.Objects;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
@@ -15,6 +16,7 @@ import lombok.Setter;
 public class Team {
 
   @Id
+  @GeneratedValue
   private Long id;
 
   @NotNull
