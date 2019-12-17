@@ -2,6 +2,7 @@ package com.jbuelow.injurycounter.webui.form;
 
 import com.jbuelow.injurycounter.data.entity.Person;
 import com.jbuelow.injurycounter.data.repo.PersonRepository;
+import com.jbuelow.injurycounter.data.repo.TeamRepository;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.Objects;
@@ -20,9 +21,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class ModifyUserController {
 
   private final PersonRepository personRepo;
+  private final TeamRepository teamRepo;
 
-  public ModifyUserController(PersonRepository personRepo) {
+  public ModifyUserController(PersonRepository personRepo,
+      TeamRepository teamRepo) {
     this.personRepo = personRepo;
+    this.teamRepo = teamRepo;
   }
 
   @InitBinder
@@ -47,6 +51,8 @@ public class ModifyUserController {
       }
     }
 
+    model.addAttribute("teams", teamRepo.findAll());
+
     return "addUser";
   }
 
@@ -55,6 +61,7 @@ public class ModifyUserController {
     personRepo.save(person);
     model.addAttribute("command", person);
     model.addAttribute("submitted", true);
+    model.addAttribute("teams", teamRepo.findAll());
     return "addUser";
   }
 

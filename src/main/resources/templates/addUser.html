@@ -48,8 +48,13 @@
       </tr>
       <tr><td><br/></td></tr>
       <tr>
-        <td>Staff</td>
-        <td><input type="checkbox" name="staff" readonly="" th:field="*{staff}"/></td>
+        <td>Team</td>
+        <td>
+          <select th:field="*{team}">
+            <option value="">No Team</option>
+            <option th:each="t : ${teams}" th:value="${t.id}" th:text="${t.name}"></option>
+          </select>
+        </td>
       </tr>
     </table>
     <input type="submit"/>
