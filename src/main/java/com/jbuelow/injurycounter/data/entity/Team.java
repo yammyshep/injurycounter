@@ -1,6 +1,5 @@
 package com.jbuelow.injurycounter.data.entity;
 
-import java.awt.Color;
 import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
