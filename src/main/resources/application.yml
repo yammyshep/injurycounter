@@ -28,4 +28,4 @@ injury-counter:
   new-injury:
     title: "Congratulations!"
     showFireworks: false
-    footer: "<html><center>${has/have} reset the injury counter after<br>${prevDays}, ${prevTime}</center></html>"
+    footer: "<html><center>&{has/have} reset the injury counter after<br>&{prevTime}</center></html>"
