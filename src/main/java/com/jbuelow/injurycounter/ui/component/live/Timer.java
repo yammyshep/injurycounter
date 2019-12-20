@@ -35,7 +35,7 @@ public class Timer extends JLabel {
 
   @Override
   public void paintComponent(Graphics g) {
-    String text = getHumanReadableDiff();
+    String text = getHumanReadableDiff(lastInjury);
     setText(text);
     log.trace("Setting new timer text to {}", text);
     super.paintComponent(g);
@@ -61,7 +61,7 @@ public class Timer extends JLabel {
     return mills/86400000+" days, "+(mills%86400000)/3600000+" hours";
   }
 
-  private String getHumanReadableDiff() {
+  private static String getHumanReadableDiff(Instant lastInjury) {
     Instant now = Instant.now();
     Duration duration = Duration.between(lastInjury, now);
     long absSeconds = Math.abs(duration.toMillis());
