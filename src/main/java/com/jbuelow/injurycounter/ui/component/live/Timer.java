@@ -61,7 +61,7 @@ public class Timer extends JLabel {
     return mills/86400000+" days, "+(mills%86400000)/3600000+" hours";
   }
 
-  private static String getHumanReadableDiff(Instant lastInjury) {
+  public static String getHumanReadableDiff(Instant lastInjury) {
     Instant now = Instant.now();
     Duration duration = Duration.between(lastInjury, now);
     long absSeconds = Math.abs(duration.toMillis());
