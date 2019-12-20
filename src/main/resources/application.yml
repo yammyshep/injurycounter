@@ -25,3 +25,7 @@ injury-counter:
   instructions:
     wifiNetwork: DC-Guest
     webAddress: injury.jbuelow.com
+  new-injury:
+    title: "Congratulations!"
+    showFireworks: false
+    footer: "<html><center>${has/have} reset the injury counter after<br>${prevDays}, ${prevTime}</center></html>"
