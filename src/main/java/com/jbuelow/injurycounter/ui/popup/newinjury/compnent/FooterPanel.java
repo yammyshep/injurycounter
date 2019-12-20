@@ -68,7 +68,9 @@ public class FooterPanel extends JPanel {
     @Override
     public void onApplicationEvent(InjuryUpdateEvent injuryUpdateEvent) {
       log.debug("Got InjuryUpdateEvent.");
-      setForInjury(injuryUpdateEvent.getInjury(), injuryUpdateEvent.getLastInjury());
+      if (Objects.nonNull(injuryUpdateEvent.getLastInjury())) {
+        setForInjury(injuryUpdateEvent.getInjury(), injuryUpdateEvent.getLastInjury());
+      }
     }
 
   }
