@@ -15,9 +15,11 @@ import javax.swing.SwingConstants;
 import org.apache.commons.text.StrSubstitutor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationListener;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 @Component
+@Profile("useUI")
 public class FooterPanel extends JPanel {
 
   @Value("${injury-counter.new-injury.footer")

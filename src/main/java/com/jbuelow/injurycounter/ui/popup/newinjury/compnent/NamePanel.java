@@ -12,9 +12,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import org.springframework.context.ApplicationListener;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 @Component
+@Profile("useUI")
 public class NamePanel extends JPanel {
 
   private final JLabel nameLabel = new JLabel("John Doe", SwingConstants.CENTER);

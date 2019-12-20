@@ -12,10 +12,12 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationListener;
+import org.springframework.context.annotation.Profile;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
 @Component
+@Profile("useUI")
 public class TitlePanel extends JPanel {
 
   private final JLabel titleLabel = new JLabel("", SwingConstants.CENTER);
@@ -23,7 +25,7 @@ public class TitlePanel extends JPanel {
   private final JLabel rightFirework = new JLabel();
 
   @Value("${injury-counter.new-injury.title}")
-  private String titleText = "Congratulations!";
+  private String titleText;
 
   @Value("${injury-counter.new-injury.showFireworks}")
   private Boolean showFireworks;
