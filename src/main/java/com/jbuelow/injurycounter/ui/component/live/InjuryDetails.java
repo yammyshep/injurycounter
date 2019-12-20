@@ -42,8 +42,10 @@ public class InjuryDetails extends JPanel {
       nameSB.append(" ")
           .append(nameLabel.getFont().canDisplay('\u2192') ? "\u2192" : ">")
           .append(" ");
+      nameSB.append(Optional.ofNullable(victim.getShortName()).orElse(victim.getName()));
+    } else {
+      nameSB.append(victim.getName());
     }
-    nameSB.append(victim.getName());
     nameLabel.setText(nameSB.toString());
     descriptionLabel.setText(injury.isHideDescription()?"<<DESCRIPTION HIDDEN>>":injury.getDescription());
   }
