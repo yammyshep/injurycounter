@@ -2,6 +2,7 @@ package com.jbuelow.injurycounter.ui.component.live;
 
 import com.jbuelow.injurycounter.data.entity.Injury;
 import com.jbuelow.injurycounter.data.entity.Person;
+import com.jbuelow.injurycounter.event.injuryupdate.InjuryUpdateEvent;
 import com.jbuelow.injurycounter.ui.helper.event.resolutiondetermined.ResolutionDeterminedEvent;
 import java.awt.BorderLayout;
 import java.awt.Font;
@@ -56,6 +57,17 @@ public class InjuryDetails extends JPanel {
     public void onApplicationEvent(ResolutionDeterminedEvent resolutionDeterminedEvent) {
       nameLabel.setFont(new Font(getFont().getName(), getFont().getStyle(), resolutionDeterminedEvent.getSizing().displayPercent(13f)));
       descriptionLabel.setFont(new Font(getFont().getName(), getFont().getStyle(), resolutionDeterminedEvent.getSizing().displayPercent(7.5f)));
+    }
+
+  }
+
+  @Component
+  private class InjuryUpdateEventListener implements
+      ApplicationListener<InjuryUpdateEvent> {
+
+    @Override
+    public void onApplicationEvent(InjuryUpdateEvent injuryUpdateEvent) {
+      setInjuryDetails(injuryUpdateEvent.getInjury());
     }
 
   }

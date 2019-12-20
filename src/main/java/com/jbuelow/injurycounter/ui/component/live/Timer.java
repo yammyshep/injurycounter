@@ -1,5 +1,6 @@
 package com.jbuelow.injurycounter.ui.component.live;
 
+import com.jbuelow.injurycounter.event.injuryupdate.InjuryUpdateEvent;
 import com.jbuelow.injurycounter.ui.helper.event.resolutiondetermined.ResolutionDeterminedEvent;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -85,6 +86,17 @@ public class Timer extends JLabel {
     @Override
     public void onApplicationEvent(ResolutionDeterminedEvent resolutionDeterminedEvent) {
       setFont(new Font(getFont().getName(), getFont().getStyle(), resolutionDeterminedEvent.getSizing().displayPercent(15f)));
+    }
+
+  }
+
+  @Component
+  private class InjuryUpdateEventListener implements
+      ApplicationListener<InjuryUpdateEvent> {
+
+    @Override
+    public void onApplicationEvent(InjuryUpdateEvent injuryUpdateEvent) {
+      setLastInjury(injuryUpdateEvent.getInjury().getTimestamp().toInstant());
     }
 
   }
