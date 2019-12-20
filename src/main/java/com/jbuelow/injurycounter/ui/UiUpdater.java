@@ -2,8 +2,7 @@ package com.jbuelow.injurycounter.ui;
 
 import com.jbuelow.injurycounter.data.entity.Injury;
 import com.jbuelow.injurycounter.data.repo.InjuryRepository;
-import com.jbuelow.injurycounter.ui.component.live.InjuryDetails;
-import com.jbuelow.injurycounter.ui.component.live.Timer;
+import com.jbuelow.injurycounter.event.injuryupdate.InjuryUpdateEventPublisher;
 import java.util.ArrayList;
 import java.util.Collections;
 import lombok.extern.slf4j.Slf4j;
@@ -17,16 +16,16 @@ import org.springframework.stereotype.Service;
 public class UiUpdater {
 
   private final InjuryRepository injuryRepo;
-  private final Timer timer;
-  private final InjuryDetails injuryDetails;
+  private final InjuryUpdateEventPublisher eventPublisher;
 
   private Injury lastInjury = new Injury();
 
+  private Boolean firstInjury = true;
+
   public UiUpdater(InjuryRepository injuryRepo,
-      Timer timer, InjuryDetails injuryDetails) {
+      InjuryUpdateEventPublisher eventPublisher) {
     this.injuryRepo = injuryRepo;
-    this.timer = timer;
-    this.injuryDetails = injuryDetails;
+    this.eventPublisher = eventPublisher;
   }
 
   @Scheduled(fixedRate = 1000)
@@ -36,18 +35,22 @@ public class UiUpdater {
     Injury injury = injuries.get(injuries.size()-1);
     if (!Injury.isEqual(injury, lastInjury)) {
       log.debug("New injury candidate found with id {}.", injury.getId());
-      setLastInjury(injury);
+      setLastInjury(injury, lastInjury);
       lastInjury = injury;
     }
   }
 
-  private void setLastInjury(Injury injury) {
+  private void setLastInjury(Injury injury, Injury lastInjury) {
     if (injury.isHidden()) {
       log.debug("Injury #{} is hidden. Cancelling ui update.", injury.getId());
       return;
     }
-    timer.setLastInjury(injury.getTimestamp().toInstant());
-    injuryDetails.setInjuryDetails(injury);
+    if (firstInjury) {
+      eventPublisher.publish(injury);
+      firstInjury = false;
+    } else {
+      eventPublisher.publish(injury, lastInjury);
+    }
   }
 
 }
