@@ -17,8 +17,12 @@ public class InjuryUpdateEventPublisher {
   }
 
   public void publish(Injury injury) {
+    publish(injury, null);
+  }
+
+  public void publish(Injury injury, Injury lastInjury) {
     log.debug("Publishing injury update event for injury with id {}", injury.getId());
-    InjuryUpdateEvent e = new InjuryUpdateEvent(this, injury);
+    InjuryUpdateEvent e = new InjuryUpdateEvent(this, injury, lastInjury);
     applicationEventPublisher.publishEvent(e);
   }
 

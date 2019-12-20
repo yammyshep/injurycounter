@@ -9,9 +9,17 @@ public class InjuryUpdateEvent extends ApplicationEvent {
   @Getter
   private Injury injury;
 
+  @Getter
+  private Injury lastInjury;
+
   public InjuryUpdateEvent(Object source, Injury injury) {
     super(source);
     this.injury = injury;
+  }
+
+  public InjuryUpdateEvent(Object source, Injury injury, Injury lastInjury) {
+    this(source, injury);
+    this.lastInjury = lastInjury;
   }
 
 }
