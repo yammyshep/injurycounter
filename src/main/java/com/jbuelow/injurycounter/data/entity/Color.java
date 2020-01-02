@@ -18,4 +18,20 @@ public class Color implements Serializable {
     return new java.awt.Color(r, g, b);
   }
 
+  public String toHtmlHexColor() {
+    StringBuilder sb = new StringBuilder();
+    sb.append("#");
+    sb.append(String.format("%02X", r));
+    sb.append(String.format("%02X", g));
+    sb.append(String.format("%02X", b));
+    return sb.toString();
+  }
+
+  public static boolean isEqual(Color c1, Color c2) {
+    return
+        c1.r == c2.r &&
+            c1.g == c2.g &&
+            c1.b == c2.b;
+  }
+
 }
