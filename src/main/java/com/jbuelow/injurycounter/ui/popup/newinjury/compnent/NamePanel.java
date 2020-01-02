@@ -1,6 +1,7 @@
 package com.jbuelow.injurycounter.ui.popup.newinjury.compnent;
 
 import com.jbuelow.injurycounter.data.entity.Injury;
+import com.jbuelow.injurycounter.data.entity.Team;
 import com.jbuelow.injurycounter.event.injuryupdate.InjuryUpdateEvent;
 import com.jbuelow.injurycounter.ui.helper.DisplaySizing;
 import com.jbuelow.injurycounter.ui.helper.event.resolutiondetermined.ResolutionDeterminedEvent;
@@ -30,9 +31,11 @@ public class NamePanel extends JPanel {
   public void setFromInjury(Injury injury) {
     StringBuilder sb = new StringBuilder();
     sb.append("<html><center>");
+    sb.append(Team.toHtmlFlag(injury.getPerson().getTeam()));
     sb.append(injury.getPerson().getName());
     if (Objects.nonNull(injury.getInstigator())) {
       sb.append("<br>&<br>");
+      sb.append(Team.toHtmlFlag(injury.getInstigator().getTeam()));
       sb.append(injury.getInstigator().getName());
     }
     sb.append("</center></html>");
