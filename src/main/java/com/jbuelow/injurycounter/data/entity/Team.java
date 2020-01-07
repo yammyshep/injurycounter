@@ -53,7 +53,7 @@ public class Team {
         (Objects.equals(t1.getId(), t2.getId())) &&
             (Objects.equals(t1.getName(), t2.getName())) &&
             (Objects.equals(t1.getAbbreviation(), t2.getAbbreviation())) &&
-            (Color.isEqual(t1.getColor(), t2.getColor())) &&
+            (Objects.nonNull(t1.getColor()) ? Color.isEqual(t1.getColor(), t2.getColor()) : Objects.isNull(t2.getColor())) &&
             (Objects.equals(t1.getDescription(), t2.getDescription()));
   }
 
