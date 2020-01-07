@@ -54,6 +54,6 @@ public class Person implements Comparable<Person> {
         (Objects.equals(p1.getGender(), p2.getGender())) &&
         (Objects.equals(p1.getGrade(), p2.getGrade())) &&
         (Objects.equals(p1.getDob(), p2.getDob())) &&
-        (Team.isEqual(p1.getTeam(), p2.getTeam()));
+        (Objects.nonNull(p1.getTeam()) ? Team.isEqual(p1.getTeam(), p2.getTeam()) : Objects.isNull(p2.getTeam()));
   }
 }
