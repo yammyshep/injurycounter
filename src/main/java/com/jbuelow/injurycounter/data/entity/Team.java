@@ -48,13 +48,30 @@ public class Team {
     return sb.toString();
   }
 
-  public static boolean isEqual(Team t1, Team t2) {
+  /**
+   * Checks if this Team instance and the one provided are the same Team
+   * DOES NOT check fields. use equals() for checking if fields are equal
+   *
+   * @param t Team object to check for equality against
+   * @return equality of this instance and provided
+   */
+  public boolean sameAs(Team t) {
+    return Objects.equals(this.getId(), t.getId());
+  }
+
+  /**
+   * Checks if this Team instance and the one provided are equal on all fields
+   *
+   * @param t Team object to check for equality against
+   * @return equality of this instance and provided
+   */
+  public boolean equals(Team t) {
     return
-        (Objects.equals(t1.getId(), t2.getId())) &&
-            (Objects.equals(t1.getName(), t2.getName())) &&
-            (Objects.equals(t1.getAbbreviation(), t2.getAbbreviation())) &&
-            (Objects.nonNull(t1.getColor()) ? Color.isEqual(t1.getColor(), t2.getColor()) : Objects.isNull(t2.getColor())) &&
-            (Objects.equals(t1.getDescription(), t2.getDescription()));
+        (Objects.equals(this.getId(), t.getId())) &&
+        (Objects.equals(this.getName(), t.getName())) &&
+        (Objects.equals(this.getAbbreviation(), t.getAbbreviation())) &&
+        (Objects.nonNull(this.getColor()) ? Color.isEqual(this.getColor(), t.getColor()) : Objects.isNull(t.getColor())) &&
+        (Objects.equals(this.getDescription(), t.getDescription()));
   }
 
 }

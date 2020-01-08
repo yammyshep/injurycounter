@@ -53,24 +53,47 @@ public class Injury implements Comparable<Injury> {
   @NotNull
   private boolean hideDrawing = false;
 
+  /**
+   * Compare this Injury instance against another by timestamp
+   *
+   * @param o Injury object to compare against
+   * @return time offset between compared injuries
+   */
   @Override
   public int compareTo(Injury o) {
     return this.getTimestamp().compareTo(o.getTimestamp());
   }
 
-  public static boolean isEqual(Injury i1, Injury i2) {
+  /**
+   * Checks if this Injury instance and the one provided are the same Injury
+   * DOES NOT check fields. use equals() for checking if fields are equal
+   *
+   * @param i Injury object to check for equality against
+   * @return equality of this instance and provided
+   */
+  public boolean sameAs(Injury i) {
+    return Objects.equals(this.getId(), i.getId());
+  }
+
+  /**
+   * Checks if this Injury instance and the one provided are equal on all fields
+   *
+   * @param i Injury object to check for deep equality against
+   * @return equality of this instance and provided
+   */
+  public boolean equals(Injury i) {
     return
-        (Objects.equals(i1.getId(), i2.getId())) &&
-        (i1.isHidden() == i2.isHidden()) &&
-        (i1.isReviewed() == i2.isReviewed()) &&
-        (i1.isHideFromStats() == i2.isHideFromStats()) &&
-        (Person.isEqual(i1.getPerson(), i2.getPerson())) &&
-        (Person.isEqual(i1.getInstigator(), i2.getInstigator())) &&
-        (Objects.equals(i1.getTimestamp(), i2.getTimestamp())) &&
-        (Objects.equals(i1.getDescription(), i2.getDescription())) &&
-        (i1.isHideDescription() == i2.isHideDescription()) &&
-        (Arrays.equals(i1.getDrawing(), i2.getDrawing())) &&
-        (i1.isHideDrawing() == i2.isHideDrawing());
+        (Objects.equals(this.getId(), i.getId())) &&
+            (this.isHidden() == i.isHidden()) &&
+            (this.isReviewed() == i.isReviewed()) &&
+            (this.isHideFromStats() == i.isHideFromStats()) &&
+            (this.getPerson().equals(i.getPerson())) &&
+            (this.getInstigator().equals(i.getInstigator())) &&
+            (Objects.equals(this.getTimestamp(), i.getTimestamp())) &&
+            (Objects.equals(this.getDescription(), i.getDescription())) &&
+            (this.isHideDescription() == i.isHideDescription()) &&
+            (Arrays.equals(this.getDrawing(), i.getDrawing())) &&
+            (this.isHideDrawing() == i.isHideDrawing());
   }
 
 }

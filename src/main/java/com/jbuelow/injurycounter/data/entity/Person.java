@@ -38,19 +38,43 @@ public class Person implements Comparable<Person> {
   @OneToOne
   private Team team;
 
+  /**
+   * Compare this Person instance against another by alphabetical order
+   *
+   * @param o Person object to compare against
+   * @return alphabetical offset between compared Persons
+   */
   @Override
   public int compareTo(Person o) {
     return this.getName().compareTo(o.getName());
   }
 
-  public static boolean isEqual(Person p1, Person p2) {
-    return
-        (Objects.equals(p1.getId(), p2.getId())) &&
-        (Objects.equals(p1.getName(), p2.getName())) &&
-        (Objects.equals(p1.getShortName(), p2.getShortName())) &&
-        (Objects.equals(p1.getGender(), p2.getGender())) &&
-        (Objects.equals(p1.getGrade(), p2.getGrade())) &&
-        (Objects.equals(p1.getDob(), p2.getDob())) &&
-        (Objects.nonNull(p1.getTeam()) ? Team.isEqual(p1.getTeam(), p2.getTeam()) : Objects.isNull(p2.getTeam()));
+  /**
+   * Checks if this Person instance and the one provided are the same Person
+   * DOES NOT check fields. use equals() for checking if fields are equal
+   *
+   * @param p Person object to check for equality against
+   * @return equality of this instance and provided
+   */
+  public boolean sameAs(Person p) {
+    return Objects.equals(this.getId(), p.getId());
   }
+
+  /**
+   * Checks if this Person instance and the one provided are equal on all fields
+   *
+   * @param p Person object to check for equality against
+   * @return equality of this instance and provided
+   */
+  public boolean equals(Person p) {
+    return
+        (Objects.equals(this.getId(), p.getId())) &&
+            (Objects.equals(this.getName(), p.getName())) &&
+            (Objects.equals(this.getShortName(), p.getShortName())) &&
+            (Objects.equals(this.getGender(), p.getGender())) &&
+            (Objects.equals(this.getGrade(), p.getGrade())) &&
+            (Objects.equals(this.getDob(), p.getDob())) &&
+            (Objects.nonNull(this.getTeam()) ? this.getTeam().equals(p.getTeam()) : Objects.isNull(p.getTeam()));
+  }
+
 }
