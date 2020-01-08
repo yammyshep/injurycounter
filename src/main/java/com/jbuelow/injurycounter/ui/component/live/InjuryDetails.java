@@ -1,7 +1,5 @@
 package com.jbuelow.injurycounter.ui.component.live;
 
-import static com.jbuelow.injurycounter.data.entity.Team.toHtmlFlag;
-
 import com.jbuelow.injurycounter.data.entity.Injury;
 import com.jbuelow.injurycounter.data.entity.Person;
 import com.jbuelow.injurycounter.event.injuryupdate.InjuryUpdateEvent;
@@ -42,17 +40,17 @@ public class InjuryDetails extends JPanel {
     nameSB.append("<html>");
     if (instigator != null &&
         instigator != victim) {
-      nameSB.append(toHtmlFlag(instigator.getTeam()));
+      nameSB.append(instigator.getTeam().toHtmlFlag());
       nameSB.append(" ");
       nameSB.append(Optional.ofNullable(instigator.getShortName()).orElse(instigator.getName()));
       nameSB.append("  ")
           .append(nameLabel.getFont().canDisplay('\u2192') ? "\u2192" : ">")
           .append("  ");
-      nameSB.append(toHtmlFlag(victim.getTeam()));
+      nameSB.append(victim.getTeam().toHtmlFlag());
       nameSB.append(" ");
       nameSB.append(Optional.ofNullable(victim.getShortName()).orElse(victim.getName()));
     } else {
-      nameSB.append(toHtmlFlag(victim.getTeam()));
+      nameSB.append(victim.getTeam().toHtmlFlag());
       nameSB.append(victim.getName());
     }
     nameSB.append("</html>");
