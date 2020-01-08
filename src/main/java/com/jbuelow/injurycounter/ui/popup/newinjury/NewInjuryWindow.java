@@ -76,7 +76,8 @@ public class NewInjuryWindow extends JFrame {
 
     @Override
     public void onApplicationEvent(InjuryUpdateEvent injuryUpdateEvent) {
-      if (Objects.nonNull(injuryUpdateEvent.getLastInjury())) {
+      if (Objects.nonNull(injuryUpdateEvent.getLastInjury()) &&
+      !injuryUpdateEvent.getInjury().sameAs(injuryUpdateEvent.getLastInjury())) {
         showForInjury(injuryUpdateEvent.getInjury());
       }
     }
