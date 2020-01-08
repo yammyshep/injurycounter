@@ -1,6 +1,7 @@
 package com.jbuelow.injurycounter.data.entity;
 
 import java.io.Serializable;
+import java.util.Objects;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -27,11 +28,20 @@ public class Color implements Serializable {
     return sb.toString();
   }
 
-  public static boolean isEqual(Color c1, Color c2) {
+  /**
+   * Checks if this Color instance and the one provided are equal
+   *
+   * @param c Color object to check for equality against
+   * @return equality of this instance and provided
+   */
+  public boolean equals(Color c) {
+    if (Objects.isNull(c)) {
+      return false;
+    }
     return
-        c1.r == c2.r &&
-            c1.g == c2.g &&
-            c1.b == c2.b;
+        this.r == c.r &&
+        this.g == c.g &&
+        this.b == c.b;
   }
 
 }
