@@ -44,9 +44,6 @@ public class Person implements Comparable<Person> {
   }
 
   public static boolean isEqual(Person p1, Person p2) {
-    if (p1 == p2) {
-      return true;
-    }
     return
         (Objects.equals(p1.getId(), p2.getId())) &&
         (Objects.equals(p1.getName(), p2.getName())) &&
