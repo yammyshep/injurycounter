@@ -15,6 +15,16 @@ public class Color implements Serializable {
   private int g;
   private int b;
 
+  public Color() {
+    this(0, 0, 0);
+  }
+
+  public Color(int r, int g, int b) {
+    this.r = r;
+    this.g = g;
+    this.b = b;
+  }
+
   public java.awt.Color toAwtColor() {
     return new java.awt.Color(r, g, b);
   }

@@ -38,11 +38,11 @@ public class Team {
 
   private String description;
 
-  public static String toHtmlFlag(Team team) {
+  public String toHtmlFlag() {
     StringBuilder sb = new StringBuilder();
-    if (Objects.nonNull(team) && Objects.nonNull(team.getColor())) {
+    if (Objects.nonNull(this.getColor())) {
       sb.append("<font color=");
-      sb.append(team.getColor().toHtmlHexColor());
+      sb.append(this.getColor().toHtmlHexColor());
       sb.append(">\u2691</font>");
     }
     return sb.toString();

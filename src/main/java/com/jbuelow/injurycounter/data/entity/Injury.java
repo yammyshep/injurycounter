@@ -94,7 +94,7 @@ public class Injury implements Comparable<Injury> {
             (this.isReviewed() == i.isReviewed()) &&
             (this.isHideFromStats() == i.isHideFromStats()) &&
             (this.getPerson().equals(i.getPerson())) &&
-            (this.getInstigator().equals(i.getInstigator())) &&
+            (Objects.nonNull(this.getInstigator()) ? this.getInstigator().equals(i.getInstigator()) : Objects.isNull(i.getInstigator())) &&
             (Objects.equals(this.getTimestamp(), i.getTimestamp())) &&
             (Objects.equals(this.getDescription(), i.getDescription())) &&
             (this.isHideDescription() == i.isHideDescription()) &&
