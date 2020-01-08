@@ -72,6 +72,9 @@ public class Injury implements Comparable<Injury> {
    * @return equality of this instance and provided
    */
   public boolean sameAs(Injury i) {
+    if (Objects.isNull(i)) {
+      return false;
+    }
     return Objects.equals(this.getId(), i.getId());
   }
 
@@ -82,6 +85,9 @@ public class Injury implements Comparable<Injury> {
    * @return equality of this instance and provided
    */
   public boolean equals(Injury i) {
+    if (Objects.isNull(i)) {
+      return false;
+    }
     return
         (Objects.equals(this.getId(), i.getId())) &&
             (this.isHidden() == i.isHidden()) &&

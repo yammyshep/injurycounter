@@ -56,6 +56,9 @@ public class Team {
    * @return equality of this instance and provided
    */
   public boolean sameAs(Team t) {
+    if (Objects.isNull(t)) {
+      return false;
+    }
     return Objects.equals(this.getId(), t.getId());
   }
 
@@ -66,11 +69,14 @@ public class Team {
    * @return equality of this instance and provided
    */
   public boolean equals(Team t) {
+    if (Objects.isNull(t)) {
+      return false;
+    }
     return
         (Objects.equals(this.getId(), t.getId())) &&
         (Objects.equals(this.getName(), t.getName())) &&
         (Objects.equals(this.getAbbreviation(), t.getAbbreviation())) &&
-        (Objects.nonNull(this.getColor()) ? Color.isEqual(this.getColor(), t.getColor()) : Objects.isNull(t.getColor())) &&
+        (Objects.nonNull(this.getColor()) ? this.getColor().equals(t.getColor()) : Objects.isNull(t.getColor())) &&
         (Objects.equals(this.getDescription(), t.getDescription()));
   }
 

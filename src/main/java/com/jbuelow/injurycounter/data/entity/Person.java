@@ -57,6 +57,9 @@ public class Person implements Comparable<Person> {
    * @return equality of this instance and provided
    */
   public boolean sameAs(Person p) {
+    if (Objects.isNull(p)) {
+      return false;
+    }
     return Objects.equals(this.getId(), p.getId());
   }
 
@@ -67,6 +70,9 @@ public class Person implements Comparable<Person> {
    * @return equality of this instance and provided
    */
   public boolean equals(Person p) {
+    if (Objects.isNull(p)) {
+      return false;
+    }
     return
         (Objects.equals(this.getId(), p.getId())) &&
             (Objects.equals(this.getName(), p.getName())) &&
