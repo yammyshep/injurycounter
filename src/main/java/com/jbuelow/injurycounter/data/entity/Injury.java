@@ -65,7 +65,7 @@ public class Injury implements Comparable<Injury> {
         (i1.isReviewed() == i2.isReviewed()) &&
         (i1.isHideFromStats() == i2.isHideFromStats()) &&
         (Person.isEqual(i1.getPerson(), i2.getPerson())) &&
-        (Person.isEqual(i1.getPerson(), i2.getPerson())) &&
+        (Person.isEqual(i1.getInstigator(), i2.getInstigator())) &&
         (Objects.equals(i1.getTimestamp(), i2.getTimestamp())) &&
         (Objects.equals(i1.getDescription(), i2.getDescription())) &&
         (i1.isHideDescription() == i2.isHideDescription()) &&
