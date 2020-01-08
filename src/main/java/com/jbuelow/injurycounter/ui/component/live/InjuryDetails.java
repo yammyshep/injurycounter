@@ -2,6 +2,7 @@ package com.jbuelow.injurycounter.ui.component.live;
 
 import com.jbuelow.injurycounter.data.entity.Injury;
 import com.jbuelow.injurycounter.data.entity.Person;
+import com.jbuelow.injurycounter.data.entity.Team;
 import com.jbuelow.injurycounter.event.injuryupdate.InjuryUpdateEvent;
 import com.jbuelow.injurycounter.ui.helper.event.resolutiondetermined.ResolutionDeterminedEvent;
 import java.awt.BorderLayout;
@@ -40,17 +41,20 @@ public class InjuryDetails extends JPanel {
     nameSB.append("<html>");
     if (instigator != null &&
         instigator != victim) {
-      nameSB.append(instigator.getTeam().toHtmlFlag());
+      Optional<Team> instTeam = Optional.ofNullable(instigator.getTeam());
+      nameSB.append(instTeam.orElse(new Team()).toHtmlFlag());
       nameSB.append(" ");
       nameSB.append(Optional.ofNullable(instigator.getShortName()).orElse(instigator.getName()));
       nameSB.append("  ")
           .append(nameLabel.getFont().canDisplay('\u2192') ? "\u2192" : ">")
           .append("  ");
-      nameSB.append(victim.getTeam().toHtmlFlag());
+      Optional<Team> team = Optional.ofNullable(victim.getTeam());
+      nameSB.append(team.orElse(new Team()).toHtmlFlag());
       nameSB.append(" ");
       nameSB.append(Optional.ofNullable(victim.getShortName()).orElse(victim.getName()));
     } else {
-      nameSB.append(victim.getTeam().toHtmlFlag());
+      Optional<Team> team = Optional.ofNullable(victim.getTeam());
+      nameSB.append(team.orElse(new Team()).toHtmlFlag());
       nameSB.append(victim.getName());
     }
     nameSB.append("</html>");
