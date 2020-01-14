@@ -59,14 +59,4 @@ public class StatisticsService implements ApplicationContextAware {
     return componentMap.get(statClass);
   }
 
-  @Deprecated
-  public Object getValueFor(Class statClass) {
-    return componentMap.get(statClass).getValue();
-  }
-
-  @Deprecated
-  public List getConsideredDataFor(Class statClass) {
-    return componentMap.get(statClass).getConsideredData();
-  }
-
 }
