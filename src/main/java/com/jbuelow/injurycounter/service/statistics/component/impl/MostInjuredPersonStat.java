@@ -10,7 +10,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import lombok.Getter;
-import lombok.Setter;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -25,7 +24,6 @@ public class MostInjuredPersonStat implements StatComponent<Injury, Entry<Person
   private volatile ArrayList<Injury> consideredData;
 
   @Getter
-  @Setter
   private final Boolean nightly = false;
 
   public MostInjuredPersonStat(InjuryRepository injuryRepo) {

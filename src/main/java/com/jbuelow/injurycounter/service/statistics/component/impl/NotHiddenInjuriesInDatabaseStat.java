@@ -6,7 +6,6 @@ import com.jbuelow.injurycounter.service.statistics.acquisition.AcquisitionThrea
 import com.jbuelow.injurycounter.service.statistics.component.StatComponent;
 import java.util.ArrayList;
 import lombok.Getter;
-import lombok.Setter;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -20,7 +19,6 @@ public class NotHiddenInjuriesInDatabaseStat implements StatComponent<Injury, Do
   private ArrayList<Injury> consideredData;
 
   @Getter
-  @Setter
   private final Boolean nightly = false;
 
   public NotHiddenInjuriesInDatabaseStat(InjuryRepository injuryRepo) {
