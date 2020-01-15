@@ -59,4 +59,11 @@ public class StatisticsService implements ApplicationContextAware {
     return componentMap.get(statClass);
   }
 
+  public List<Class> getStats() {
+    List<Class> classes = new ArrayList<>();
+    for (Map.Entry<Class, StatComponent> entry : componentMap.entrySet()) {
+      classes.add(entry.getKey());
+    }
+    return classes;
+  }
 }

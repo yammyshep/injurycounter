@@ -2,6 +2,7 @@ package com.jbuelow.injurycounter.api.statistics;
 
 import com.jbuelow.injurycounter.service.statistics.StatisticsService;
 import com.jbuelow.injurycounter.service.statistics.component.StatComponent;
+import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +19,11 @@ public class GetStatisticsValueController {
   public GetStatisticsValueController(
       StatisticsService statService) {
     this.statService = statService;
+  }
+
+  @GetMapping("/list")
+  public List<Class> getClassifierListing() {
+    return statService.getStats();
   }
 
   @GetMapping("/value/{statClass}")
