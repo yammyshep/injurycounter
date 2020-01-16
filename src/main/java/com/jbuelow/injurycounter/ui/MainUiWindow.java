@@ -2,6 +2,7 @@ package com.jbuelow.injurycounter.ui;
 
 import com.jbuelow.injurycounter.ui.component.instructions.InstructionsPanel;
 import com.jbuelow.injurycounter.ui.component.live.LivePanel;
+import com.jbuelow.injurycounter.ui.component.statistics.StatisticsPanel;
 import com.jbuelow.injurycounter.ui.helper.DisplaySizing;
 import com.jbuelow.injurycounter.ui.helper.event.resolutiondetermined.ResolutionDeterminedEventPublisher;
 import java.awt.BorderLayout;
@@ -22,6 +23,7 @@ public class MainUiWindow extends JFrame {
 
   private final LivePanel livePanel;
   private final InstructionsPanel instructionsPanel;
+  private final StatisticsPanel statisticsPanel;
   private final ResolutionDeterminedEventPublisher rdep;
 
   private final JTabbedPane tabPane = new JTabbedPane();
@@ -30,9 +32,11 @@ public class MainUiWindow extends JFrame {
   public MainUiWindow(LivePanel livePanel/*,
       HistoryPanel historyPanel*/,
       InstructionsPanel instructionsPanel,
+      StatisticsPanel statisticsPanel,
       ResolutionDeterminedEventPublisher rdep) {
     this.livePanel = livePanel;
     this.instructionsPanel = instructionsPanel;
+    this.statisticsPanel = statisticsPanel;
     //this.historyPanel = historyPanel;
     this.rdep = rdep;
   }
@@ -62,6 +66,7 @@ public class MainUiWindow extends JFrame {
     add(tabPane);
     tabPane.addTab("live", livePanel);
     tabPane.addTab("instructions", instructionsPanel);
+    tabPane.addTab("statistics", statisticsPanel);
   }
 
   @Scheduled(fixedRate = 360000)
