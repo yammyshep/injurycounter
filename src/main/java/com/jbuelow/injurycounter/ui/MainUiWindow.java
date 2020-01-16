@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 @Profile("useUI")
-public class InjuryTimeDisplay extends JFrame {
+public class MainUiWindow extends JFrame {
 
   private final LivePanel livePanel;
   private final InstructionsPanel instructionsPanel;
@@ -27,7 +27,7 @@ public class InjuryTimeDisplay extends JFrame {
   private final JTabbedPane tabPane = new JTabbedPane();
   //private final HistoryPanel historyPanel;
 
-  public InjuryTimeDisplay(LivePanel livePanel/*,
+  public MainUiWindow(LivePanel livePanel/*,
       HistoryPanel historyPanel*/,
       InstructionsPanel instructionsPanel,
       ResolutionDeterminedEventPublisher rdep) {
